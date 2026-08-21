@@ -1,0 +1,13 @@
+.sc-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.sc-checkbox input {
+  width: 1rem;
+  height: 1rem;
+}
+.sc-checkbox .label {
+  user-select: none;
+}

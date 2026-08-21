@@ -1,0 +1,145 @@
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <!-- 1: select-all checkbox column -->
+        <th class="col-checkbox">
+          <input
+            type="checkbox"
+            [checked]="allSelected"
+            [indeterminate]="someSelected"
+            (change)="toggleSelectAll($any($event.target).checked)"
+            aria-label="Select all rows"
+          />
+        </th>
+
+        <th class="col-no sortable" (click)="sortBy('no')">
+          No.
+          <span class="sort-icon">
+            <span class="tri up" [class.active]="sortField === 'no' && sortOrder === 'asc'"></span>
+            <span class="tri down" [class.active]="sortField === 'no' && sortOrder === 'desc'"></span>
+          </span>
+        </th>
+
+        <th class="col-title sortable">
+          <!-- 2: drag handle for column reordering -->
+          <span class="drag-handle" (click)="$event.stopPropagation()" aria-label="Reorder column">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+              <circle cx="2" cy="2" r="1.2" /><circle cx="6" cy="2" r="1.2" /><circle cx="10" cy="2" r="1.2" />
+              <circle cx="2" cy="6" r="1.2" /><circle cx="6" cy="6" r="1.2" /><circle cx="10" cy="6" r="1.2" />
+            </svg>
+          </span>
+          <span (click)="sortBy('title')" class="th-label">
+            Title
+            <span class="sort-icon">
+              <span class="tri up" [class.active]="sortField === 'title' && sortOrder === 'asc'"></span>
+              <span class="tri down" [class.active]="sortField === 'title' && sortOrder === 'desc'"></span>
+            </span>
+          </span>
+        </th>
+
+        <th class="col-status">Status</th>
+
+        <th class="col-value sortable" (click)="sortBy('value')">
+          Title
+          <span class="sort-icon">
+            <span class="tri up" [class.active]="sortField === 'value' && sortOrder === 'asc'"></span>
+            <span class="tri down" [class.active]="sortField === 'value' && sortOrder === 'desc'"></span>
+          </span>
+        </th>
+
+        <th class="col-date sortable" (click)="sortBy('date')">
+          Date
+          <span class="sort-icon">
+            <span class="tri up" [class.active]="sortField === 'date' && sortOrder === 'asc'"></span>
+            <span class="tri down" [class.active]="sortField === 'date' && sortOrder === 'desc'"></span>
+          </span>
+          <!-- 3 -> 4: divider / resize handle marking the start of the frozen section -->
+          <span class="col-resize-handle" (mousedown)="onResizeStart($event)" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3">
+              <path d="M4 3L1 6L4 9" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M8 3L11 6L8 9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </th>
+
+        <!-- 4: frozen trailing columns -->
+        <th class="col-frozen-title frozen">Title</th>
+        <th class="col-action frozen">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <ng-container *ngFor="let row of rows; trackBy: trackByRow">
+        <ng-container *ngTemplateOutlet="rowTpl; context: { $implicit: row, level: 0 }"></ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<!-- Recursive row template: renders one row, then its children indented one level deeper -->
+<ng-template #rowTpl let-row let-level="level">
+  <tr class="data-row" [class.child-row]="level > 0">
+    <td class="col-checkbox">
+      <input type="checkbox" [checked]="row.selected" (change)="toggleRow(row)" aria-label="Select row" />
+    </td>
+
+    <td class="col-no">{{ row.no }}</td>
+
+    <td class="col-title">
+      <div class="title-cell" [style.paddingLeft.px]="level * 24">
+        <!-- 5: expand / collapse toggle for hierarchical rows -->
+        <button
+          *ngIf="row.children?.length; else spacer"
+          type="button"
+          class="expand-toggle"
+          (click)="toggleExpand(row)"
+          [class.expanded]="row.expanded"
+          [attr.aria-expanded]="row.expanded"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M4 5.5L7 8.5L10 5.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <ng-template #spacer><span class="expand-spacer"></span></ng-template>
+
+        <div class="title-text">
+          <span class="title-main">{{ row.title }}</span>
+          <span class="title-sub" *ngIf="row.subtitle">{{ row.subtitle }}</span>
+        </div>
+      </div>
+    </td>
+
+    <td class="col-status">
+      <span class="status-badge" [class.active]="row.status === 'Active'" [class.inactive]="row.status === 'Inactive'">
+        <span class="status-dot"></span>{{ row.status }}
+      </span>
+    </td>
+
+    <td class="col-value">{{ row.value }}</td>
+    <td class="col-date">{{ row.date }}</td>
+
+    <!-- 6: truncated content with a CSS hover tooltip -->
+    <td class="col-frozen-title frozen">
+      <div class="ref-text">
+        <span class="ref-main truncate" [attr.data-tooltip]="row.refTitle">{{ row.refTitle }}</span>
+        <span class="ref-sub" *ngIf="row.refSubtitle">{{ row.refSubtitle }}</span>
+      </div>
+    </td>
+
+    <!-- 7: row action menu -->
+    <td class="col-action frozen">
+      <button type="button" class="action-menu" aria-label="Row actions">
+        <svg width="4" height="14" viewBox="0 0 4 14" fill="currentColor">
+          <circle cx="2" cy="2" r="1.6" /><circle cx="2" cy="7" r="1.6" /><circle cx="2" cy="12" r="1.6" />
+        </svg>
+      </button>
+    </td>
+  </tr>
+
+  <ng-container *ngIf="row.expanded && row.children?.length">
+    <ng-container *ngFor="let child of row.children; trackBy: trackByRow">
+      <ng-container *ngTemplateOutlet="rowTpl; context: { $implicit: child, level: level + 1 }"></ng-container>
+    </ng-container>
+  </ng-container>
+</ng-template>

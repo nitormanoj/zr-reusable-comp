@@ -1,0 +1,17 @@
+<h2>Custom templates</h2>
+<sc-example-panel [code]="code">
+  <ng-template #avatarTpl let-row>
+    <div class="avatar">{{row.name.charAt(0)}}</div>
+  </ng-template>
+
+  <ng-template #statusTpl let-row>
+    <span [style.color]="row.active ? 'green' : 'gray'">{{row.active ? 'Active' : 'Inactive'}}</span>
+  </ng-template>
+
+  <ng-template #actionsTpl let-row>
+    <button (click)="onAction(row, 'Edit')">Edit</button>
+    <button (click)="onAction(row, 'Delete')">Delete</button>
+  </ng-template>
+
+  <ui-table [data]="rows" [columns]="columns" (rowClick)="onAction($event, 'Row click')"></ui-table>
+</sc-example-panel>

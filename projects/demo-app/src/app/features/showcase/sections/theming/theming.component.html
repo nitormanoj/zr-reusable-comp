@@ -1,0 +1,13 @@
+<h2>Theming</h2>
+<sc-example-panel [code]="'<ui-table ...> with CSS vars'">
+  <div class="controls">
+    <div class="presets">
+      <span>Presets:</span>
+      <button *ngFor="let p of presets" (click)="applyPreset(p)">{{p.name}}</button>
+    </div>
+  </div>
+
+  <div class="preview" [ngStyle]="vars">
+    <ui-table [data]="rows" [columns]="columns"></ui-table>
+  </div>
+</sc-example-panel>

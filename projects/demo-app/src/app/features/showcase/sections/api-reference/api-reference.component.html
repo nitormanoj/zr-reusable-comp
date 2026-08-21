@@ -1,0 +1,24 @@
+<h2>API reference</h2>
+<section>
+  <h3>Inputs</h3>
+  <table class="api-table">
+    <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+    <tr *ngFor="let i of inputs"><td>{{i.name}}</td><td>{{i.type}}</td><td>{{i.description}}</td></tr>
+  </table>
+</section>
+
+<section>
+  <h3>Outputs</h3>
+  <table class="api-table">
+    <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+    <tr *ngFor="let o of outputs"><td>{{o.name}}</td><td>{{o.type}}</td><td>{{o.description}}</td></tr>
+  </table>
+</section>
+
+<section>
+  <h3>TableColumn fields</h3>
+  <table class="api-table">
+    <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+    <tr *ngFor="let c of columnFields"><td>{{c.name}}</td><td>{{c.type}}</td><td>{{c.description}}</td></tr>
+  </table>
+</section>

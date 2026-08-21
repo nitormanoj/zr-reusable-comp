@@ -1,0 +1,31 @@
+<h2>Table </h2>
+<h5>Table displays data in tabular format.</h5>
+<h3>Import</h3>
+<sc-code-block code="import { TableComponent } from 'ui-table';" language="ts"></sc-code-block>
+<h2>Basic </h2>
+<h5>DataTable requires a collection to display along with column components for the representation of the data.</h5>
+<sc-example-panel [code]="code" language="html">
+  <ng-template #statusTpl let-row>
+    <span [style.color]="row.active ? 'green' : 'gray'">{{row.active ? 'Active' : 'Inactive'}}</span>
+  </ng-template>
+
+  <ui-table [data]="rows" [columns]="columns" [paginated]="true" [pageSize]="5"></ui-table>
+</sc-example-panel>
+
+<section class="table-composition">
+  <h3>Table container composition</h3>
+  <p>High-level parts that make up the table container and common UX affordances.</p>
+
+  <ol>
+    <li><strong>Selection column</strong> — optional checkbox column for selecting rows.</li>
+    <li><strong>Global actions</strong> — toolbar or kebab with bulk actions for the table.</li>
+    <li><strong>Sortable headers</strong> — column headers with sort indicators and keyboard support.</li>
+    <li><strong>Row actions</strong> — per-row action menu (edit, delete, more).</li>
+    <li><strong>Row grouping / expansion</strong> — tree-like groups or expandable details rows.</li>
+    <li><strong>Tooltips</strong> — hover tooltips for truncated or extra info.</li>
+    <li><strong>Column resize / reflow</strong> — adjustable column widths and responsive layout.</li>
+  </ol>
+
+  <h4>Table Composition Breakdown:</h4>
+  <p>Each numbered item above maps to an area in the table UI. Use column templates, header templates, and row templates to implement these affordances with `ui-table`.</p>
+</section>

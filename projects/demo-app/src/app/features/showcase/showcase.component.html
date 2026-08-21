@@ -1,0 +1,12 @@
+<div class="showcase-shell">
+  <aside class="side-nav">
+    <h3>Component</h3>
+    <nav>
+      <a *ngFor="let s of sections" href="#" (click)="goTo(s.path, $event)" [class.active]="isActive(s.path)">{{s.label}}</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

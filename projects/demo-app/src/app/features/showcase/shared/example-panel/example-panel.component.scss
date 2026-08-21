@@ -1,0 +1,6 @@
+.example-panel{border:1px solid #e6e6e6;border-radius:6px}
+.example-panel .tabs{display:flex;border-bottom:1px solid #eaeaea}
+.example-panel .tabs button{flex:0 0 auto;padding:8px 12px;border:none;background:transparent;cursor:pointer}
+.example-panel .tabs button.active{background:#f3f3f3}
+.example-panel .panel-body{padding:12px}
+.example-panel .preview{min-height:120px}

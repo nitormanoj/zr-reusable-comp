@@ -1,0 +1,9 @@
+.showcase-shell{display:flex;gap:24px;padding:20px}
+.side-nav{width:220px;position:sticky;top:16px;border-right:1px solid #e6e6e6;padding-right:16px}
+.side-nav h3{margin:0 0 12px 0}
+.side-nav nav{display:flex;flex-direction:column;gap:8px}
+.side-nav a{color:#333;text-decoration:none;padding:6px;border-radius:4px}
+.side-nav a.active{background:#f3f3f3;font-weight:600}
+.content{flex:1;min-height:400px}
+
+.example-panel{border:1px solid #eaeaea;padding:16px;border-radius:6px;background:#fff}

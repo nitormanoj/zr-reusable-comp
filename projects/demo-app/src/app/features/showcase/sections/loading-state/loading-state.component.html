@@ -1,0 +1,7 @@
+<h2>Loading state</h2>
+<sc-example-panel [code]="code">
+  <div style="margin-bottom:8px">
+    <button (click)="toggleLoading()">Toggle loading (mock async)</button>
+  </div>
+  <ui-table [data]="rows" [columns]="columns" [loading]="loading"></ui-table>
+</sc-example-panel>

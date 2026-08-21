@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "./projects/demo-app/tsconfig.app.json" },
+    { "path": "./projects/ui-table/tsconfig.lib.json" }
+  ],
+  "compilerOptions": {
+    "paths": {
+      "ui-table": ["projects/ui-table/src/public-api.ts"]
+    }
+  }
+}
