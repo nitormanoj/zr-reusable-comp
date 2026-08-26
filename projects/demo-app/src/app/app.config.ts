@@ -7,8 +7,8 @@ import { provideRouter, Routes } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 
-import { AppComponent } from './app/app.component';
-import { routes as showcaseRoutes } from './app/features/showcase/showcase.routes';
+import { AppComponent } from './app.component';
+import { routes as showcaseRoutes } from '../app/features/showcase/showcase.routes';
 
 const routes: Routes = [
   { path: '', redirectTo: 'showcase', pathMatch: 'full' },
@@ -22,7 +22,10 @@ bootstrapApplication(AppComponent, {
 
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          darkModeSelector: 'none'
+        }
       }
     })
   ]

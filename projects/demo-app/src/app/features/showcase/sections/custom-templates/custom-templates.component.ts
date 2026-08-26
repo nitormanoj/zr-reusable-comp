@@ -1,15 +1,14 @@
 import { Component, AfterViewInit, TemplateRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableComponent, TableColumn } from 'ui-table';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { CT_ROWS, CTRow } from './custom-templates.mock-data';
 
 @Component({
-  selector: 'sc-custom-templates',
-  standalone: true,
-  imports: [CommonModule, TableComponent, ExamplePanelComponent],
-  templateUrl: './custom-templates.component.html',
-  styleUrls: ['./custom-templates.component.scss']
+    selector: 'sc-custom-templates',
+    imports: [TableComponent, ExamplePanelComponent],
+    templateUrl: './custom-templates.component.html',
+    styleUrls: ['./custom-templates.component.scss']
 })
 export class CustomTemplatesComponent implements AfterViewInit {
   rows: CTRow[] = CT_ROWS;

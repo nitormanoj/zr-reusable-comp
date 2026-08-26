@@ -1,13 +1,15 @@
 import { Component, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TableComponent, TableColumn } from 'ui-table';
+// import { TableComponent, TableColumn } from 'ui-table';
 
 interface DemoRow { id: number; name: string; active: boolean; score: number; joined: string }
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TableComponent, RouterModule],
+  imports: [
+    // TableComponent,
+     RouterModule],
   template: `
     <header class="app-header" style="padding:12px 16px; border-bottom:1px solid #eee; background:#fafafa;">
       <h1 style="margin:0; font-size:1.25rem;">ui-table Demo</h1>
@@ -25,15 +27,15 @@ export class AppComponent implements AfterViewInit {
   lastAction = 'none';
 
   ngAfterViewInit(): void {
-    // assign template reference to Status column
-    const c = this.columns.find(c => c.field === 'active');
-    if (c) c.template = this.statusTpl;
-    // trigger OnPush consumers by replacing the reference
-    this.columns = [...this.columns];
-    console.log('AppComponent columns after view init:', this.columns);
+    // // assign template reference to Status column
+    // const c = this.columns.find(c => c.field === 'active');
+    // if (c) c.template = this.statusTpl;
+    // // trigger OnPush consumers by replacing the reference
+    // this.columns = [...this.columns];
+    // console.log('AppComponent columns after view init:', this.columns);
   }
   data: DemoRow[] = [];
-  columns: TableColumn<DemoRow>[] = [];
+  // columns: TableColumn<DemoRow>[] = [];
 
   constructor() {
     this.data = [
@@ -48,12 +50,12 @@ export class AppComponent implements AfterViewInit {
     ];
 
     // columns include a template for status column via TemplateRef token mapping in runtime
-    this.columns = [
-      { field: 'id', header: 'ID', sortable: true },
-      { field: 'name', header: 'Name', sortable: true },
-      { field: 'active', header: 'Status', template: null as any },
-      { field: 'score', header: 'Score', sortable: true }
-    ];
+    // this.columns = [
+    //   { field: 'id', header: 'ID', sortable: true },
+    //   { field: 'name', header: 'Name', sortable: true },
+    //   { field: 'active', header: 'Status', template: null as any },
+    //   { field: 'score', header: 'Score', sortable: true }
+    // ];
   }
 
   

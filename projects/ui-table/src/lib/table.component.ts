@@ -3,52 +3,64 @@ import { CommonModule } from '@angular/common';
 import { TableColumn } from './table.types';
 
 @Component({
-  selector: 'ui-table',
-  standalone: true,
-  imports: [CommonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'ui-table',
+    imports: [CommonModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
   <div class="ui-table-wrapper">
     <table class="ui-table" role="table">
       <thead>
         <tr role="row">
-          <th *ngFor="let col of columns; let i = index"
+          @for (col of columns; track col; let i = $index) {
+            <th
               role="columnheader"
               [attr.aria-sort]="getAriaSort(col)"
               [class.sortable]="col.sortable"
               (click)="onHeaderClick(col)">
-            <button class="header-btn" (keydown)="$event.key === 'Enter' && onHeaderClick(col)" tabindex="0">
-              {{col.header}}
-              <span *ngIf="col.sortable">{{displaySortIndicator(col)}}</span>
-            </button>
-          </th>
+              <button class="header-btn" (keydown)="$event.key === 'Enter' && onHeaderClick(col)" tabindex="0">
+                {{col.header}}
+                @if (col.sortable) {
+                  <span>{{displaySortIndicator(col)}}</span>
+                }
+              </button>
+            </th>
+          }
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="loading">
-          <td [attr.colspan]="columns?.length">Loading...</td>
-        </tr>
-        <tr *ngFor="let row of pagedData; let ri = index" role="row" (click)="rowClick.emit(row)" [class.row-hover]="true">
-          <td *ngFor="let col of columns">
-            <ng-container *ngIf="col.template; else defaultCell">
-              <ng-container *ngTemplateOutlet="col.template; context: { $implicit: row, row: row }"></ng-container>
-            </ng-container>
-            <ng-template #defaultCell>{{ row[col.field] }}</ng-template>
-          </td>
-        </tr>
+        @if (loading) {
+          <tr>
+            <td [attr.colspan]="columns?.length">Loading...</td>
+          </tr>
+        }
+        @for (row of pagedData; track row; let ri = $index) {
+          <tr role="row" (click)="rowClick.emit(row)" [class.row-hover]="true">
+            @for (col of columns; track col) {
+              <td>
+                @if (col.template) {
+                  <ng-container *ngTemplateOutlet="col.template; context: { $implicit: row, row: row }"></ng-container>
+                } @else {
+                  {{ row[col.field] }}
+                }
+              </td>
+            }
+          </tr>
+        }
       </tbody>
     </table>
-
-    <div class="pagination" *ngIf="paginated">
-      <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
-      <span>Page {{currentPage}} / {{totalPages}}</span>
-      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
-    </div>
+  
+    @if (paginated) {
+      <div class="pagination">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+        <span>Page {{currentPage}} / {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+    }
   </div>
   `,
-  styles: [
-    `:host{display:block} .ui-table{width:100%;border-collapse:collapse} th{background:var(--table-header-bg,#f3f3f3);padding:8px;text-align:left} td{padding:8px;border-top:1px solid #e0e0e0} tr.row-hover:hover{background:var(--table-row-hover,#f9f9f9)} .header-btn{background:none;border:none;padding:0;font:inherit;cursor:pointer}`
-  ]
+    styles: [
+        `:host{display:block} .ui-table{width:100%;border-collapse:collapse} th{background:var(--table-header-bg,#f3f3f3);padding:8px;text-align:left} td{padding:8px;border-top:1px solid #e0e0e0} tr.row-hover:hover{background:var(--table-row-hover,#f9f9f9)} .header-btn{background:none;border:none;padding:0;font:inherit;cursor:pointer}`
+    ]
 })
 export class TableComponent<T> implements OnInit, OnChanges {
   @Input() data: T[] = [];

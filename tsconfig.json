@@ -6,6 +6,8 @@
     { "path": "./projects/ui-table/tsconfig.lib.json" }
   ],
   "compilerOptions": {
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
     "paths": {
       "ui-table": ["projects/ui-table/src/public-api.ts"]
     }

@@ -1,5 +1,16 @@
-:root{
+:root {
   --table-header-bg: #f3f4f6;
   --table-row-hover: #f9fafb;
 }
-body{font-family:Arial,Helvetica,sans-serif;padding:16px}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 16px
+}
+
+html,
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #1f2937;
+}
