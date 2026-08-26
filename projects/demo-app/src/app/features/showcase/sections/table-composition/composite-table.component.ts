@@ -79,7 +79,7 @@ export class CompositeTableComponent {
       return;
     }
 
-    const field = this.sortField;
+    const field1 = this.sortField;
     const order = this.sortOrder === 'asc' ? 1 : -1;
 
     this.rows.sort((a, b) => {

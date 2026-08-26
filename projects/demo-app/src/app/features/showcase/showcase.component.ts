@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class ShowcaseComponent {
   sections = [
+    { path: 'button', label: 'Buttons' },
     { path: 'basic', label: 'Basic' },
     { path: 'composition', label: 'Composition' },
     { path: 'sorting', label: 'Sorting' },
@@ -22,7 +23,7 @@ export class ShowcaseComponent {
     { path: 'api-reference', label: 'API reference' }
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   goTo(path: string, ev: Event) {
     ev.preventDefault();
