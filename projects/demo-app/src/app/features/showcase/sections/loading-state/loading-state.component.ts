@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableComponent, TableColumn } from 'ui-table';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { L_ROWS, LRow } from './loading-state.mock-data';
 
 @Component({
-  selector: 'sc-loading-state',
-  standalone: true,
-  imports: [CommonModule, TableComponent, ExamplePanelComponent],
-  templateUrl: './loading-state.component.html',
-  styleUrls: ['./loading-state.component.scss']
+    selector: 'sc-loading-state',
+    imports: [TableComponent, ExamplePanelComponent],
+    templateUrl: './loading-state.component.html',
+    styleUrls: ['./loading-state.component.scss']
 })
 export class LoadingStateComponent {
   rows: LRow[] = L_ROWS;

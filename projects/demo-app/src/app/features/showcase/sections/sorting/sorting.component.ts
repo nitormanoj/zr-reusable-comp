@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableComponent, TableColumn } from 'ui-table';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { SORT_ROWS, SortRow } from './sorting.mock-data';
 
 @Component({
-  selector: 'sc-sorting',
-  standalone: true,
-  imports: [CommonModule, TableComponent, ExamplePanelComponent],
-  templateUrl: './sorting.component.html',
-  styleUrls: ['./sorting.component.scss']
+    selector: 'sc-sorting',
+    imports: [TableComponent, ExamplePanelComponent],
+    templateUrl: './sorting.component.html',
+    styleUrls: ['./sorting.component.scss']
 })
 export class SortingComponent {
   rows: SortRow[] = SORT_ROWS;

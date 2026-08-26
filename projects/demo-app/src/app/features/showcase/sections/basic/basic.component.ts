@@ -1,16 +1,15 @@
 import { Component, AfterViewInit, TemplateRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableComponent, TableColumn } from 'ui-table';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { CodeBlockComponent } from '../../shared/code-block/code-block.component';
 import { BASIC_ROWS, BasicRow } from './basic.mock-data';
 
 @Component({
-  selector: 'sc-basic',
-  standalone: true,
-  imports: [CommonModule, TableComponent, ExamplePanelComponent, CodeBlockComponent],
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss']
+    selector: 'sc-basic',
+    imports: [TableComponent, ExamplePanelComponent, CodeBlockComponent],
+    templateUrl: './basic.component.html',
+    styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements AfterViewInit {
   rows: BasicRow[] = BASIC_ROWS;

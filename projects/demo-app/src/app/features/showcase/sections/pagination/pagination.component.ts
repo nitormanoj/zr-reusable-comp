@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableComponent, TableColumn } from 'ui-table';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { PAGE_ROWS, PageRow } from './pagination.mock-data';
 
 @Component({
-  selector: 'sc-pagination',
-  standalone: true,
-  imports: [CommonModule, TableComponent, ExamplePanelComponent],
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+    selector: 'sc-pagination',
+    imports: [TableComponent, ExamplePanelComponent],
+    templateUrl: './pagination.component.html',
+    styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent {
   rows: PageRow[] = PAGE_ROWS;

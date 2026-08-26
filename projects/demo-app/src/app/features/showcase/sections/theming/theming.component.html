@@ -3,7 +3,9 @@
   <div class="controls">
     <div class="presets">
       <span>Presets:</span>
-      <button *ngFor="let p of presets" (click)="applyPreset(p)">{{p.name}}</button>
+      @for (p of presets; track p) {
+        <button (click)="applyPreset(p)">{{p.name}}</button>
+      }
     </div>
   </div>
 

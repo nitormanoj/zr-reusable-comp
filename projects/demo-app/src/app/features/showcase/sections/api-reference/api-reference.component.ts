@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableComponent } from 'ui-table';
 import { TableColumn } from 'ui-table';
 
 @Component({
-  selector: 'sc-api-reference',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './api-reference.component.html',
-  styleUrls: ['./api-reference.component.scss']
+    selector: 'sc-api-reference',
+    imports: [],
+    templateUrl: './api-reference.component.html',
+    styleUrls: ['./api-reference.component.scss']
 })
 export class ApiReferenceComponent {
   inputs = [
