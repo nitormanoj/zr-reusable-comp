@@ -1,0 +1,15 @@
+.zr-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--zr-spacing-control-gap, 0.5rem);
+  cursor: pointer;
+}
+
+.zr-checkbox .label {
+  user-select: none;
+}
+
+.zr-checkbox:has(.p-checkbox-disabled) {
+  cursor: not-allowed;
+  opacity: 0.65;
+}

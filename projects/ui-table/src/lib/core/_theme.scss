@@ -1,0 +1,25 @@
+:root {
+  --zr-color-brand: #006f8f;
+  --zr-color-text-primary: #1a2433;
+  --zr-color-text-secondary: #596579;
+  --zr-color-surface: #ffffff;
+  --zr-color-border: #d8dee8;
+  --zr-color-focus: #006f8f;
+  --zr-spacing-control-gap: 10px;
+  --zr-font-size-body: 14px;
+  --zr-radius-control: 4px;
+}
+
+.zr-checkbox .p-checkbox .p-checkbox-box {
+  border-color: var(--zr-color-border);
+  border-radius: var(--zr-radius-control);
+}
+
+.zr-checkbox .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight {
+  background: var(--zr-color-brand);
+  border-color: var(--zr-color-brand);
+}
+
+.zr-checkbox .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:focus-visible {
+  box-shadow: 0 0 0 2px var(--zr-color-surface), 0 0 0 4px var(--zr-color-focus);
+}

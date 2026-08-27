@@ -8,21 +8,13 @@ interface DemoRow { id: number; name: string; active: boolean; score: number; jo
   selector: 'app-root',
   standalone: true,
   imports: [TableComponent, RouterModule],
-  template: `
-    <header class="app-header" style="padding:12px 16px; border-bottom:1px solid #eee; background:#fafafa;">
-      <h1 style="margin:0; font-size:1.25rem;">ui-table Demo</h1>
-    </header>
-
-    <ng-template #status let-row>
-      <span [style.color]="row.active ? 'green' : 'gray'">{{row.active ? 'Active' : 'Inactive'}}</span>
-    </ng-template>
-
-    <router-outlet></router-outlet>
-  `
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild('status', { read: TemplateRef }) statusTpl!: TemplateRef<any>;
   lastAction = 'none';
+  currentYear = new Date().getFullYear();
 
   ngAfterViewInit(): void {
     // assign template reference to Status column

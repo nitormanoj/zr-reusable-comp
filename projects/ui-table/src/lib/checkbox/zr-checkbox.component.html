@@ -1,0 +1,10 @@
+<div class="zr-checkbox">
+  <p-checkbox
+    [binary]="true"
+    [inputId]="inputId"
+    [ngModel]="checked"
+    [disabled]="disabled"
+    (ngModelChange)="onCheckedChange($event)">
+  </p-checkbox>
+  <label class="label" [for]="inputId">{{ label }}</label>
+</div>

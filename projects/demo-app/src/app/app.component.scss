@@ -1,0 +1,84 @@
+.app-header {
+  min-height: 44px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--zr-color-surface);
+  border-bottom: 1px solid var(--zr-color-border);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--zr-color-text-primary);
+  text-decoration: none;
+
+  strong, small {
+    display: block;
+  }
+
+  strong {
+    font-size: 15px;
+    letter-spacing: 0.2px;
+  }
+
+  small {
+    margin-top: 3px;
+    color: var(--zr-color-text-secondary);
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+}
+
+.brand-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: #fff;
+  background: var(--zr-color-brand);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--zr-color-text-secondary);
+  font-size: 13px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #3a9d72;
+  border-radius: 50%;
+}
+
+
+.app-footer {
+  padding: 12px 16px;
+  background: #fafafa;
+}
+
+.app-header {
+  border-bottom: 1px solid #eee;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.app-footer {
+  border-top: 1px solid #eee;
+  color: #666;
+  text-align: center;
+}

@@ -1,5 +1,11 @@
 import * as i0 from '@angular/core';
 import { EventEmitter, Component, ChangeDetectionStrategy, Input, Output } from '@angular/core';
+import * as i1 from '@angular/common';
+import { CommonModule } from '@angular/common';
+import * as i2 from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import * as i1$1 from 'primeng/checkbox';
+import { CheckboxModule } from 'primeng/checkbox';
 
 class TableComponent {
     data = [];
@@ -80,8 +86,14 @@ class TableComponent {
         if (this.currentPage < this.totalPages)
             this.currentPage++;
     }
+    ngOnInit() {
+        console.log('TableComponent ngOnInit', { dataLen: this.data?.length, columnsLen: this.columns?.length });
+    }
+    ngOnChanges(changes) {
+        console.log('TableComponent ngOnChanges', changes);
+    }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: TableComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: TableComponent, isStandalone: true, selector: "ui-table", inputs: { data: "data", columns: "columns", loading: "loading", paginated: "paginated", pageSize: "pageSize" }, outputs: { rowClick: "rowClick", sortChange: "sortChange" }, ngImport: i0, template: `
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: TableComponent, isStandalone: true, selector: "ui-table", inputs: { data: "data", columns: "columns", loading: "loading", paginated: "paginated", pageSize: "pageSize" }, outputs: { rowClick: "rowClick", sortChange: "sortChange" }, usesOnChanges: true, ngImport: i0, template: `
   <div class="ui-table-wrapper">
     <table class="ui-table" role="table">
       <thead>
@@ -119,11 +131,11 @@ class TableComponent {
       <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
     </div>
   </div>
-  `, isInline: true, styles: [":host{display:block}.ui-table{width:100%;border-collapse:collapse}th{background:var(--table-header-bg,#f3f3f3);padding:8px;text-align:left}td{padding:8px;border-top:1px solid #e0e0e0}tr.row-hover:hover{background:var(--table-row-hover,#f9f9f9)}.header-btn{background:none;border:none;padding:0;font:inherit;cursor:pointer}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush });
+  `, isInline: true, styles: [":host{display:block}.ui-table{width:100%;border-collapse:collapse}th{background:var(--table-header-bg,#f3f3f3);padding:8px;text-align:left}td{padding:8px;border-top:1px solid #e0e0e0}tr.row-hover:hover{background:var(--table-row-hover,#f9f9f9)}.header-btn{background:none;border:none;padding:0;font:inherit;cursor:pointer}\n"], dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: TableComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'ui-table', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, template: `
+            args: [{ selector: 'ui-table', standalone: true, imports: [CommonModule], changeDetection: ChangeDetectionStrategy.OnPush, template: `
   <div class="ui-table-wrapper">
     <table class="ui-table" role="table">
       <thead>
@@ -178,9 +190,48 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                 type: Output
             }] } });
 
+class ZrCheckboxComponent {
+    checked = false;
+    label = '';
+    disabled = false;
+    inputId = `zr-checkbox-${Math.random().toString(36).slice(2, 9)}`;
+    checkedChange = new EventEmitter();
+    onCheckedChange(value) {
+        this.checkedChange.emit(value);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZrCheckboxComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: ZrCheckboxComponent, isStandalone: true, selector: "zr-checkbox", inputs: { checked: "checked", label: "label", disabled: "disabled", inputId: "inputId" }, outputs: { checkedChange: "checkedChange" }, ngImport: i0, template: "<div class=\"zr-checkbox\">\r\n  <p-checkbox\r\n    [binary]=\"true\"\r\n    [inputId]=\"inputId\"\r\n    [ngModel]=\"checked\"\r\n    [disabled]=\"disabled\"\r\n    (ngModelChange)=\"onCheckedChange($event)\">\r\n  </p-checkbox>\r\n  <label class=\"label\" [for]=\"inputId\">{{ label }}</label>\r\n</div>\r\n", styles: [".zr-checkbox{display:inline-flex;align-items:center;gap:var(--zr-spacing-control-gap, .5rem);cursor:pointer}.zr-checkbox .label{-webkit-user-select:none;user-select:none}.zr-checkbox:has(.p-checkbox-disabled){cursor:not-allowed;opacity:.65}\n"], dependencies: [{ kind: "ngmodule", type: CheckboxModule }, { kind: "component", type: i1$1.Checkbox, selector: "p-checkbox", inputs: ["value", "name", "disabled", "binary", "label", "ariaLabelledBy", "ariaLabel", "tabindex", "inputId", "style", "styleClass", "labelStyleClass", "formControl", "checkboxIcon", "readonly", "required", "trueValue", "falseValue"], outputs: ["onChange"] }, { kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZrCheckboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'zr-checkbox', standalone: true, imports: [CheckboxModule, FormsModule], changeDetection: ChangeDetectionStrategy.OnPush, template: "<div class=\"zr-checkbox\">\r\n  <p-checkbox\r\n    [binary]=\"true\"\r\n    [inputId]=\"inputId\"\r\n    [ngModel]=\"checked\"\r\n    [disabled]=\"disabled\"\r\n    (ngModelChange)=\"onCheckedChange($event)\">\r\n  </p-checkbox>\r\n  <label class=\"label\" [for]=\"inputId\">{{ label }}</label>\r\n</div>\r\n", styles: [".zr-checkbox{display:inline-flex;align-items:center;gap:var(--zr-spacing-control-gap, .5rem);cursor:pointer}.zr-checkbox .label{-webkit-user-select:none;user-select:none}.zr-checkbox:has(.p-checkbox-disabled){cursor:not-allowed;opacity:.65}\n"] }]
+        }], propDecorators: { checked: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], inputId: [{
+                type: Input
+            }], checkedChange: [{
+                type: Output
+            }] } });
+
+const ZR_DESIGN_TOKENS = {
+    colorBrand: '#006f8f',
+    colorTextPrimary: '#1a2433',
+    colorTextSecondary: '#596579',
+    colorSurface: '#ffffff',
+    colorBorder: '#d8dee8',
+    colorFocus: '#006f8f',
+    spacingControlGap: '10px',
+    fontSizeBody: '14px',
+    radiusControl: '4px',
+};
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { TableComponent };
+export { TableComponent, ZR_DESIGN_TOKENS, ZrCheckboxComponent };
 //# sourceMappingURL=ui-table.mjs.map

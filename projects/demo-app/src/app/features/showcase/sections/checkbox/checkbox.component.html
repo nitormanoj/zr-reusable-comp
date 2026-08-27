@@ -1,0 +1,11 @@
+<h2>Checkbox</h2>
+<p>A reusable checkbox component with checked state and change events.</p>
+
+<div class="example">
+  <zr-checkbox
+    [checked]="notificationsEnabled"
+    label="Enable notifications"
+    (checkedChange)="notificationsEnabled = $event">
+  </zr-checkbox>
+  <p class="state">Notifications are {{ notificationsEnabled ? 'enabled' : 'disabled' }}.</p>
+</div>

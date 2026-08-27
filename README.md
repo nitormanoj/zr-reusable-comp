@@ -1,6 +1,8 @@
 # ui-table-workspace
 
-This workspace contains a publishable Angular library `ui-table` and a demo application `demo-app`.
+This workspace contains the ZR Core UI Angular library `ui-table` and a demo application `demo-app`.
+
+The library uses PrimeNG as its component foundation and exposes ZR-owned component APIs and design tokens. Consumers should import from `ui-table`, not from the library's internal paths.
 
 How to run the demo app:
 
@@ -19,7 +21,7 @@ npx ng serve demo-app
 How to build the library for publishing:
 
 ```bash
-npx ng build ui-table
+npm run build:lib
 ```
 
 If your environment doesn't use the Angular library builder, you can build the package directly with `ng-packagr`:
@@ -36,6 +38,31 @@ How to publish:
 cd dist/ui-table
 npm publish
 ```
+
+The current package version is `0.1.0`. We follow semantic versioning: patch releases fix behavior, minor releases add backwards-compatible APIs, and major releases may contain breaking changes. Every release requires a changelog entry and maintainer approval.
+
+## Core UI reference component
+
+```ts
+import { ZrCheckboxComponent } from 'ui-table';
+
+@Component({
+  standalone: true,
+  imports: [ZrCheckboxComponent],
+  template: `
+    <zr-checkbox
+      [checked]="enabled"
+      label="Enable notifications"
+      (checkedChange)="enabled = $event">
+    </zr-checkbox>
+  `
+})
+export class SettingsComponent {
+  enabled = true;
+}
+```
+
+Load PrimeNG base styles and the ZR theme once in the consuming application's global stylesheet. See [CORE-UI-ARCHITECTURE.md](CORE-UI-ARCHITECTURE.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for architecture, adoption, testing, and governance rules.
 
 How another Angular app would install and use it after publishing:
 

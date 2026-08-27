@@ -1,9 +1,13 @@
 {
   "name": "ui-table",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "peerDependencies": {
     "@angular/core": "^16.0.0",
-    "@angular/common": "^16.0.0"
+    "@angular/common": "^16.0.0",
+    "@angular/animations": "^16.0.0",
+    "@angular/forms": "^16.0.0",
+    "primeng": "^16.9.0",
+    "primeicons": "^6.0.1"
   },
   "module": "fesm2022/ui-table.mjs",
   "typings": "index.d.ts",

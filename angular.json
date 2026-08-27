@@ -35,7 +35,7 @@
       "sourceRoot": "projects/ui-table/src",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "project": "projects/ui-table/ng-package.json"
           }
