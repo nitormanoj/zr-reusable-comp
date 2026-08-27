@@ -1,0 +1,73 @@
+<article class="doc-page">
+    <header class="doc-header">
+        <h1>Button</h1>
+        <p>
+            Button is an extension to standard
+            <a href="#" class="doc-link">button element</a>
+            with icons and
+            <a href="#" class="doc-link">theming</a>.
+        </p>
+    </header>
+
+    <section class="doc-section" id="import">
+        <h2>Import</h2>
+        <pre
+            class="code-block"><code><span class="tok-keyword">import</span> {{ '{' }} <span class="tok-class">ButtonModule</span> {{ '}' }} <span class="tok-keyword">from</span> <span class="tok-string">'primeng/button'</span>;</code></pre>
+    </section>
+    <section class="doc-section" id="basic">
+        <h2>Basic</h2>
+        <p>
+            Text to display on a button is defined with the
+            <code class="inline-code">label</code>
+            property.
+        </p>
+
+        <div class="example-panel">
+            <!-- <zr-buttons label="Submit" severity="primary"></zr-buttons> -->
+        </div>
+
+        <pre
+            class="code-block"><code>&lt;<span class="tok-tag">zr-buttons</span> <span class="tok-attr">label</span>=<span class="tok-string">"Submit"</span> <span class="tok-attr">severity</span>=<span class="tok-string">"primary"</span>&gt;&lt;/<span class="tok-tag">zr-buttons</span>&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="directive">
+        <h2>Directive</h2>
+        <p>
+            Button can also be used as directive using
+            <code class="inline-code">pButton</code>.
+            In contrary of p-button component, pButton directive does not utilize
+            ripple effect, use
+            <code class="inline-code">pRipple</code>
+            directive to enable ripple.
+        </p>
+
+        <div class="example-panel">
+          <button zrButton label="Submit" severity="success"></button> 
+        </div>
+
+        <pre class="code-block"><code>&lt;<span class="tok-tag">button</span>
+    <span class="tok-attr">zrButton</span>
+     <span class="tok-attr">label</span>=<span class="tok-string">"Submit"</span>
+    <span class="tok-attr">severity</span>=<span class="tok-string">"success"</span>&gt;
+&lt;/<span class="tok-tag">button</span>&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="link">
+        <h2>Link</h2>
+        <p>A button can be rendered as a link as well.</p>
+
+        <div class="example-panel example-panel--row">
+            <a href="#" class="p-button-link">Link</a>
+             <!-- <zr-buttons label="Link" severity="primary"></zr-buttons> -->
+            <a href="https://angular.dev/" target="_blank" rel="noopener noreferrer" class="p-button">External</a>
+            <a routerLink="/" class="p-button">Router</a>
+        </div>
+        <pre class="code-block"><code>&lt;<span class="tok-tag">p-button</span> <span class="tok-attr">label</span>=<span class="tok-string">"Link"</span> <span class="tok-attr">[link]</span>=<span class="tok-string">"true"</span> /&gt;
+&lt;<span class="tok-tag">a</span> <span class="tok-attr">href</span>=<span class="tok-string">"https://angular.dev/"</span> <span class="tok-attr">target</span>=<span class="tok-string">"_blank"</span> <span class="tok-attr">rel</span>=<span class="tok-string">"noopener noreferrer"</span> <span class="tok-attr">class</span>=<span class="tok-string">"p-button font-bold"</span>&gt;
+    External
+&lt;/<span class="tok-tag">a</span>&gt;
+&lt;<span class="tok-tag">a</span> <span class="tok-attr">routerLink</span>=<span class="tok-string">"/"</span> <span class="tok-attr">class</span>=<span class="tok-string">"p-button font-bold"</span>&gt;
+    Router
+&lt;/<span class="tok-tag">a</span>&gt;</code></pre>
+    </section>
+</article>
