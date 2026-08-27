@@ -29,11 +29,10 @@ type SortOrder = 'asc' | 'desc' | null;
  * on truncated cell content.
  */
 @Component({
-  selector: 'app-composite-table',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './composite-table.component.html',
-  styleUrls: ['./composite-table.component.scss'],
+    selector: 'app-composite-table',
+    imports: [CommonModule],
+    templateUrl: './composite-table.component.html',
+    styleUrls: ['./composite-table.component.scss']
 })
 export class CompositeTableComponent {
   @Input() rows: TableRow[] = [];

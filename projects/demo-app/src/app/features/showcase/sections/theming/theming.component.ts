@@ -5,11 +5,10 @@ import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.
 import { T_ROWS, TRow } from './theming.mock-data';
 
 @Component({
-  selector: 'sc-theming',
-  standalone: true,
-  imports: [CommonModule, TableComponent, ExamplePanelComponent],
-  templateUrl: './theming.component.html',
-  styleUrls: ['./theming.component.scss']
+    selector: 'sc-theming',
+    imports: [CommonModule, TableComponent, ExamplePanelComponent],
+    templateUrl: './theming.component.html',
+    styleUrls: ['./theming.component.scss']
 })
 export class ThemingComponent {
   rows: TRow[] = T_ROWS;

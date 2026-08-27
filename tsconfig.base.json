@@ -5,15 +5,13 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2020",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
-    "target": "es2020",
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "ui-table": ["projects/ui-table/src/public-api.ts"]
     },
-    "lib": ["es2020", "dom"]
+    "lib": ["ES2022", "dom"]
   }
 }
