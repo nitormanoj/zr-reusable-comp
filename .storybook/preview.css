@@ -1,0 +1,54 @@
+:root {
+  --zr-color-brand: #006f8f;
+  --zr-color-text-primary: #1a2433;
+  --zr-color-text-secondary: #596579;
+  --zr-color-surface: #ffffff;
+  --zr-color-border: #d8dee8;
+  --zr-color-focus: #006f8f;
+  --zr-spacing-control-gap: 10px;
+  --zr-font-size-body: 14px;
+  --zr-radius-control: 4px;
+}
+
+.zr-checkbox .p-checkbox .p-checkbox-box {
+  border-color: var(--zr-color-border);
+  border-radius: var(--zr-radius-control);
+}
+
+.zr-checkbox .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight {
+  background: var(--zr-color-brand);
+  border-color: var(--zr-color-brand);
+}
+
+.zr-checkbox .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:focus-visible {
+  box-shadow: 0 0 0 2px var(--zr-color-surface), 0 0 0 4px var(--zr-color-focus);
+}
+
+body {
+  margin: 0;
+  padding: 2rem;
+  color: var(--zr-color-text-primary);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--zr-font-size-body);
+  background: #f7f9fb;
+}
+
+/* Keep the checkbox story controls compact and on one row. */
+.docs-story,
+.css-kdwx3d {
+  min-height: 0 !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.docs-story:has(.docblock-code-toggle),
+.css-kdwx3d:has(.docblock-code-toggle) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem;
+}
+
+.docs-story .docblock-code-toggle,
+.css-kdwx3d .docblock-code-toggle {
+  margin-left: auto;
+  white-space: nowrap;
+}

@@ -52,3 +52,4 @@ dist/
 coverage/
 .env
 .env.*
+/storybook-static

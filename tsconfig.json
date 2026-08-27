@@ -1,13 +1,17 @@
 {
   "extends": "./tsconfig.base.json",
   "files": [],
+  "include": [
+    ".storybook/**/*.ts",
+    "projects/**/*.stories.ts"
+  ],
   "references": [
     { "path": "./projects/demo-app/tsconfig.app.json" },
     { "path": "./projects/ui-table/tsconfig.lib.json" }
   ],
   "compilerOptions": {
-    "esModuleInterop": true,
-    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "ui-table": ["projects/ui-table/src/public-api.ts"]
     }

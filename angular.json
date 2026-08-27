@@ -9,11 +9,9 @@
       "sourceRoot": "projects/demo-app/src",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": {
-              "base": "dist/demo-app"
-            },
+            "outputPath": "dist/demo-app",
             "index": "projects/demo-app/src/index.html",
             "polyfills": [],
             "tsConfig": "projects/demo-app/tsconfig.app.json",
@@ -24,13 +22,37 @@
               "projects/demo-app/src/styles.scss"
             ],
             "sourceMap": true,
-            "browser": "projects/demo-app/src/main.ts"
+            "main": "projects/demo-app/src/main.ts"
           }
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "demo-app:build"
+            "browserTarget": "demo-app:build"
+          }
+        },
+         "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "demo-app:build",
+            "port": 6006,
+            "compodoc": false,
+            "styles": [
+              ".storybook/preview.css"
+            ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "demo-app:build",
+            "outputDir": "storybook-static",
+            "compodoc": false,
+            "styles": [
+              ".storybook/preview.css"
+            ]
           }
         }
       }
@@ -57,7 +79,6 @@
       }
     }
   },
-  "defaultProject": "demo-app",
   "cli": {
     "analytics": false
   },

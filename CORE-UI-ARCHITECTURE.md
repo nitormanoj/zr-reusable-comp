@@ -25,3 +25,18 @@ Each component owns its public inputs, outputs, accessibility behavior, and visu
 - Prefer ZR tokens over component-local colors and spacing.
 - Every component must document keyboard behavior, accessibility names, states, and examples.
 - Every public input and output requires a unit test; interactive components also require an accessibility test.
+
+## Component documentation
+
+Run the Storybook catalog with `npm run storybook` and open `http://localhost:6006`. Build the static catalog with `npm run build-storybook`.
+
+Each component story should include:
+
+- the default, interactive, disabled, and error states that consumers need to review;
+- controls for public inputs and actions for public outputs;
+- an import and usage example;
+- keyboard, focus, labeling, and screen-reader guidance;
+- links to the relevant design tokens and known limitations.
+
+Stories are the review surface for design and product teams. A component is not ready for broad adoption until its story, tests, and API documentation are reviewed together.
+
