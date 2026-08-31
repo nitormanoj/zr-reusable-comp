@@ -28,7 +28,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo-app:build"
+            "buildTarget": "demo-app:build"
           }
         },
          "storybook": {
@@ -57,23 +57,23 @@
         }
       }
     },
-    "ui-table": {
+    "zr-components": {
       "projectType": "library",
-      "root": "projects/ui-table",
-      "sourceRoot": "projects/ui-table/src",
+      "root": "projects/zr-components",
+      "sourceRoot": "projects/zr-components/src",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ui-table/ng-package.json"
+            "project": "projects/zr-components/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "main": "projects/ui-table/src/test.ts",
-            "karmaConfig": "projects/ui-table/karma.conf.js",
-            "tsConfig": "projects/ui-table/tsconfig.spec.json"
+            "main": "projects/zr-components/src/test.ts",
+            "karmaConfig": "projects/zr-components/karma.conf.js",
+            "tsConfig": "projects/zr-components/tsconfig.spec.json"
           }
         }
       }

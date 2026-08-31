@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, TemplateRef, ViewChild } from '@angular/core';
 
-import { TableComponent, TableColumn } from 'ui-table';
+import { TableComponent, TableColumn } from 'zr-components';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { CT_ROWS, CTRow } from './custom-templates.mock-data';
 

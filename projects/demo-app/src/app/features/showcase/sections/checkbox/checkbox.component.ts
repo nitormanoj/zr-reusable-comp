@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ZrCheckboxComponent } from 'ui-table';
+import { ZrCheckboxComponent } from 'zr-components';
 
 @Component({
   selector: 'sc-checkbox-showcase',

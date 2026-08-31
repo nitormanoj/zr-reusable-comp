@@ -14,6 +14,7 @@ export class ShowcaseComponent {
   sections = [
     { path: 'button', label: 'Buttons' },
     { path: 'checkbox', label: 'Checkbox' },
+    { path: 'breadcrumb', label: 'Breadcrumb' },
     { path: 'basic', label: 'Basic' },
     { path: 'composition', label: 'Composition' },
     { path: 'sorting', label: 'Sorting' },

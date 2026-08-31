@@ -1,6 +1,6 @@
 import { Component, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TableComponent, TableColumn } from 'ui-table';
+import { TableComponent, TableColumn } from 'zr-components';
 
 interface DemoRow { id: number; name: string; active: boolean; score: number; joined: string }
 

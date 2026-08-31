@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "typeRoots": ["node_modules/@types"],
     "paths": {
-      "ui-table": ["projects/ui-table/src/public-api.ts"]
+      "zr-components": ["projects/zr-components/src/public-api.ts"]
     },
     "lib": ["ES2022", "dom"]
   }

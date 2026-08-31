@@ -1,8 +1,8 @@
-# ui-table-workspace
+# zr-components-workspace
 
-This workspace contains the ZR Core UI Angular library `ui-table` and a demo application `demo-app`.
+This workspace contains the ZR Core UI Angular library `zr-components` and a demo application `demo-app`.
 
-The library uses PrimeNG as its component foundation and exposes ZR-owned component APIs and design tokens. Consumers should import from `ui-table`, not from the library's internal paths.
+The library uses PrimeNG as its component foundation and exposes ZR-owned component APIs and design tokens. Consumers should import from `zr-components`, not from the library's internal paths.
 
 How to run the demo app:
 
@@ -27,15 +27,15 @@ npm run build:lib
 If your environment doesn't use the Angular library builder, you can build the package directly with `ng-packagr`:
 
 ```bash
-npx ng-packagr -p projects/ui-table/ng-package.json
+npx ng-packagr -p projects/zr-components/ng-package.json
 ```
 
-After build, a distributable will be in `dist/ui-table` or `projects/ui-table/dist` depending on the build command used.
+After build, a distributable will be in `dist/zr-components` or `projects/zr-components/dist` depending on the build command used.
 
 How to publish:
 
 ```bash
-cd dist/ui-table
+cd dist/zr-components
 npm publish
 ```
 
@@ -44,7 +44,7 @@ The current package version is `0.1.0`. We follow semantic versioning: patch rel
 ## Core UI reference component
 
 ```ts
-import { ZrCheckboxComponent } from 'ui-table';
+import { ZrCheckboxComponent } from 'zr-components';
 
 @Component({
   standalone: true,
@@ -69,7 +69,7 @@ How another Angular app would install and use it after publishing:
 1. Install from npm:
 
 ```bash
-npm install ui-table
+npm install zr-components
 ```
 
 2. Import and use the component in your app (example):
