@@ -1,0 +1,39 @@
+<div class="ui-table-wrapper">
+  <table class="ui-table" role="table">
+    <thead>
+      <tr role="row">
+        <th *ngFor="let col of columns; let i = index"
+            role="columnheader"
+            [attr.aria-sort]="getAriaSort(col)"
+            [class.sortable]="col.sortable"
+            (click)="onHeaderClick(col)">
+          <button class="header-btn" (keydown.enter)="onHeaderClick(col)" tabindex="0">
+            {{ col.header }}
+            <span *ngIf="col.sortable">{{ displaySortIndicator(col) }}</span>
+          </button>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngIf="loading">
+        <td [attr.colspan]="columns?.length">Loading...</td>
+      </tr>
+
+      <tr *ngFor="let row of pagedData; let ri = index" role="row" (click)="rowClick.emit(row)" class="row-hover">
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.template; else defaultCell">
+            <ng-container *ngTemplateOutlet="col.template; context: { $implicit: row, row: row }"></ng-container>
+          </ng-container>
+          <ng-template #defaultCell>{{ row[col.field] }}</ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination" *ngIf="paginated">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+    <span>Page {{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>
