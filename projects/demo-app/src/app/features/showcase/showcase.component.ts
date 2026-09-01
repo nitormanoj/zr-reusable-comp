@@ -17,89 +17,19 @@ export interface ShowcaseMenuItem {
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss']
 })
-export class ShowcaseComponent implements OnInit {
-
-  /** Active doc-level tab shown above the routed content ('features' | 'api') */
-  activeTab: 'features' | 'api' = 'features';
-
-  sections: ShowcaseMenuItem[] = [
-    {
-      label: 'Buttons',
-      children: [
-        {
-          label: 'Button',
-          children: [
-            {
-              label: 'Import',
-              path: 'button-import'
-            },
-            {
-              label: 'Basic',
-              path: 'button-basic'
-            },
-          ]
-        }
-        // {
-        //   label: 'SplitButton',
-        //   children: [
-        //     {
-        //       label: 'Button',
-        //       path: 'button/split-button/button'
-        //     },
-        //   ]
-        // }
-      ]
-    },
-
-    {
-      label: 'Form',
-      children: [
-        {
-          label: 'Checkbox',
-          children: [
-            {
-              label: 'Import',
-              path: 'checkbox'
-            },
-            {
-              label: 'Basic',
-              path: 'checkbox'
-            },
-
-          ]
-        },
-        {
-          label: 'Chips',
-          children: [
-            {
-              label: 'Chips',
-              path: 'form/chips/chips'
-            },
-
-          ]
-        }
-      ]
-    },
-
-    {
-      label: 'Table',
-      children: [
-        {
-          label: 'Basic',
-          path: 'basic'
-        },
-      ]
-    },
-
-    {
-      label: 'Theming',
-      path: 'theming'
-    },
-
-    {
-      label: 'API Reference',
-      path: 'api-reference'
-    }
+export class ShowcaseComponent {
+  sections = [
+    { path: 'button', label: 'Buttons' },
+    { path: 'checkbox', label: 'Checkbox' },
+    { path: 'breadcrumb', label: 'Breadcrumb' },
+    { path: 'basic', label: 'Basic' },
+    { path: 'composition', label: 'Composition' },
+    { path: 'sorting', label: 'Sorting' },
+    { path: 'pagination', label: 'Pagination' },
+    { path: 'custom-templates', label: 'Custom templates' },
+    { path: 'loading-state', label: 'Loading state' },
+    { path: 'theming', label: 'Theming' },
+    { path: 'api-reference', label: 'API reference' }
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }

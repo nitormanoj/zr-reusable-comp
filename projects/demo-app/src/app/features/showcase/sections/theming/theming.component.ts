@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableComponent, TableColumn } from 'ui-table';
+import { TableComponent, TableColumn } from 'zr-components';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { T_ROWS, TRow } from './theming.mock-data';
 

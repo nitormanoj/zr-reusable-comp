@@ -7,7 +7,7 @@ The library provides stable, accessible Angular components that translate ZwickR
 ## Architecture
 
 ```text
-projects/ui-table/src/lib/
+projects/zr-components/src/lib/
   core/
     tokens.ts       # typed design-token contract
     _theme.scss     # CSS custom properties and PrimeNG overrides
@@ -20,7 +20,7 @@ Each component owns its public inputs, outputs, accessibility behavior, and visu
 
 ## Adoption rules
 
-- Import components from `ui-table`, never from PrimeNG internals.
+- Import components from `zr-components`, never from PrimeNG internals.
 - Load the PrimeNG base styles and the ZR theme once at the application root.
 - Prefer ZR tokens over component-local colors and spacing.
 - Every component must document keyboard behavior, accessibility names, states, and examples.

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { TableComponent, TableColumn } from 'ui-table';
+import { TableComponent, TableColumn } from 'zr-components';
 import { ExamplePanelComponent } from '../../shared/example-panel/example-panel.component';
 import { L_ROWS, LRow } from './loading-state.mock-data';
 

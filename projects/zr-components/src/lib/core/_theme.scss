@@ -6,6 +6,8 @@
   --zr-color-border: #d8dee8;
   --zr-color-focus: #006f8f;
   --zr-spacing-control-gap: 10px;
+  --zr-spacing-breadcrumb-separator: 8px;
+  --zr-color-breadcrumb-separator: #596579;
   --zr-font-size-body: 14px;
   --zr-radius-control: 4px;
 }
@@ -22,4 +24,9 @@
 
 .zr-checkbox .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:focus-visible {
   box-shadow: 0 0 0 2px var(--zr-color-surface), 0 0 0 4px var(--zr-color-focus);
+}
+
+.zr-breadcrumb .p-breadcrumb-separator {
+  margin-inline: var(--zr-spacing-breadcrumb-separator);
+  color: var(--zr-color-breadcrumb-separator);
 }

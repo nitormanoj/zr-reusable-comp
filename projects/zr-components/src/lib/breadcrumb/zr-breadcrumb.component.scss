@@ -1,0 +1,49 @@
+.zr-breadcrumb {
+  color: var(--zr-color-text-secondary);
+}
+
+.zr-breadcrumb :is(.breadcrumb-link, .current-item, .overflow-trigger) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--zr-spacing-control-gap);
+  min-height: 2rem;
+  font: inherit;
+}
+
+.zr-breadcrumb .breadcrumb-link {
+  color: var(--zr-color-brand);
+  text-decoration: none;
+}
+
+.zr-breadcrumb .breadcrumb-link:focus-visible,
+.zr-breadcrumb .overflow-trigger:focus-visible,
+.zr-breadcrumb .overflow-item:focus-visible {
+  outline: 2px solid var(--zr-color-focus);
+  outline-offset: 2px;
+}
+
+.zr-breadcrumb .current-item {
+  color: var(--zr-color-text-primary);
+  font-weight: 600;
+}
+
+.zr-breadcrumb .overflow-trigger,
+.zr-breadcrumb .overflow-item {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.zr-breadcrumb .overflow-item {
+  display: flex;
+  width: 100%;
+  gap: var(--zr-spacing-control-gap);
+  padding: 0.5rem 0.75rem;
+  color: var(--zr-color-text-primary);
+  text-align: left;
+}
+
+.zr-breadcrumb .overflow-item:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

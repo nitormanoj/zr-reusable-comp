@@ -1,0 +1,53 @@
+<nav class="zr-breadcrumb" aria-label="Breadcrumb">
+  <p-breadcrumb [model]="primeItems" [home]="primeHome" (onItemClick)="onPrimeItemClick($event)">
+    <ng-template #item let-item let-index="index">
+      <ng-container *ngIf="item.isOverflow; else breadcrumbItem">
+        <button
+          type="button"
+          class="overflow-trigger"
+          aria-label="Show more breadcrumb items"
+          aria-haspopup="menu"
+          (click)="onItemTemplateClick(item, $event)"
+          (keydown.enter)="onItemTemplateClick(item, $event)">
+          <i [class]="item.icon" aria-hidden="true"></i>
+          <span aria-hidden="true">...</span>
+        </button>
+      </ng-container>
+      <ng-template #breadcrumbItem>
+        <ng-container *ngIf="index === primeItems.length - 1; else interactiveItem">
+          <span class="current-item" aria-current="page">
+            <i *ngIf="item.icon" [class]="item.icon" aria-hidden="true"></i>
+            <span>{{ item.label }}</span>
+          </span>
+        </ng-container>
+        <ng-template #interactiveItem>
+          <a
+            class="breadcrumb-link"
+            [routerLink]="item.routerLink"
+            [class.p-disabled]="item.disabled"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            (click)="onItemTemplateClick(item, $event)"
+            (keydown.enter)="onItemTemplateClick(item, $event)">
+            <i *ngIf="item.icon" [class]="item.icon" aria-hidden="true"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </ng-template>
+      </ng-template>
+    </ng-template>
+  </p-breadcrumb>
+
+  <p-popover #overflowPanel styleClass="zr-breadcrumb-overflow" ariaLabel="More breadcrumb items">
+    <div role="menu" aria-label="More breadcrumb items">
+      <button
+        *ngFor="let item of overflowItems"
+        type="button"
+        role="menuitem"
+        class="overflow-item"
+        [disabled]="item.disabled"
+        (click)="onOverflowItemClick(item, $event)">
+        <i *ngIf="item.icon" [class]="item.icon" aria-hidden="true"></i>
+        <span>{{ item.label }}</span>
+      </button>
+    </div>
+  </p-popover>
+</nav>

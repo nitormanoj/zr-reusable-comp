@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { TableComponent } from 'ui-table';
-import { TableColumn } from 'ui-table';
+import { TableComponent } from 'zr-components';
+import { TableColumn } from 'zr-components';
 
 @Component({
     selector: 'sc-api-reference',

@@ -35,7 +35,7 @@ A ZR-styled checkbox backed by PrimeNG.
 
 ### Usage
 
-Import \`ZrCheckboxComponent\` from \`ui-table\` and bind \`checked\` with \`checkedChange\`.
+Import \`ZrCheckboxComponent\` from \`zr-components\` and bind \`checked\` with \`checkedChange\`.
 
 ### Accessibility
 

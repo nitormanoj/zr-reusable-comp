@@ -6,7 +6,9 @@ export const routes: Routes = [
     loadComponent: () => import('./showcase.component').then(m => m.ShowcaseComponent),
     children: [
       { path: '', redirectTo: 'basic', pathMatch: 'full' },
-
+      { path: 'button', loadComponent: () => import('./sections/button/button.component').then(m => m.ButtonComponent) },
+      { path: 'checkbox', loadComponent: () => import('./sections/checkbox/checkbox.component').then(m => m.CheckboxShowcaseComponent) },
+      { path: 'breadcrumb', loadComponent: () => import('./sections/breadcrumb/breadcrumb.component').then(m => m.BreadcrumbComponent) },
       {
         path: '',
         children: [

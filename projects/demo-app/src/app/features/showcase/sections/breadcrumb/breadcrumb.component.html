@@ -1,0 +1,20 @@
+<h2>Breadcrumb</h2>
+<p>Typed navigation context for the current page.</p>
+
+<sc-example-panel [code]="code" language="ts">
+  <h3>Basic</h3>
+  <zr-breadcrumb [items]="items" (itemClick)="onItemClick($event)"></zr-breadcrumb>
+
+  <h3>With home icon</h3>
+  <zr-breadcrumb [home]="home" [items]="items"></zr-breadcrumb>
+
+  <h3>Long path</h3>
+  <zr-breadcrumb [items]="longItems" [maxVisible]="5"></zr-breadcrumb>
+
+  <p class="selected">Selected item: {{ selected }}</p>
+</sc-example-panel>
+
+<sc-code-block
+  code="&lt;zr-breadcrumb [items]=&quot;items&quot; [maxVisible]=&quot;5&quot;&gt;&lt;/zr-breadcrumb&gt;"
+  language="html">
+</sc-code-block>
