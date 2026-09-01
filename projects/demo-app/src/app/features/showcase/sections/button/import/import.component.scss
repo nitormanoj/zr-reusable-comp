@@ -1,0 +1,186 @@
+// ==========================================================================
+// Button doc page — matches reference UI (title, Import/Basic/Directive/Link)
+// ==========================================================================
+
+:host {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+}
+
+.doc-page {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 900px;
+}
+
+// --------------------------------------------------------------------------
+// Header
+// --------------------------------------------------------------------------
+
+.doc-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+  }
+}
+
+.doc-link {
+  color: #3b82f6;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Sections
+// --------------------------------------------------------------------------
+
+.doc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+  }
+}
+
+// Inline code pill, e.g. `label`, `pButton`, `pRipple`
+.inline-code {
+  background: #e2e8f0;
+  color: #334155;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 12.5px;
+}
+
+// --------------------------------------------------------------------------
+// Example panel (renders the live component)
+// --------------------------------------------------------------------------
+
+.example-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 20px;
+}
+
+.example-panel--row {
+  gap: 12px;
+}
+
+// --------------------------------------------------------------------------
+// Buttons rendered inside the example panels
+// --------------------------------------------------------------------------
+
+.p-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  background: #3b82f6;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: #2563eb;
+  }
+}
+
+.p-button-success {
+  background: #22c55e;
+
+  &:hover {
+    background: #16a34a;
+  }
+}
+
+.p-button-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 8px 4px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Code blocks
+// --------------------------------------------------------------------------
+
+.code-block {
+  margin: 0;
+  background: #024e64;
+  border-radius: 8px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #e2e8f0;
+
+  code {
+    white-space: pre;
+  }
+}
+
+.tok-keyword {
+  color: #7dd3ac; // green — import / from
+}
+
+.tok-class {
+  color: #eef2f7; // module / identifier names
+}
+
+.tok-string {
+  color: #93c5fd; // string literals
+}
+
+.tok-tag {
+  color: #f0abfc; // element / tag names
+}
+
+.tok-attr {
+  color: #7dd3ac; // attribute names
+}

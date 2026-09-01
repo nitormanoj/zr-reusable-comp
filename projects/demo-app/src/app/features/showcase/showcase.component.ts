@@ -1,7 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
+export interface ShowcaseMenuItem {
+  label: string;
+  path?: string;
+  expanded?: boolean;
+  children?: ShowcaseMenuItem[];
+}
 
 @Component({
   selector: 'app-showcase',
@@ -27,6 +34,24 @@ export class ShowcaseComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
+  ngOnInit(): void {
+    // Nested items (e.g. "Button" > "Import") default to expanded so the
+    // side nav reads as a flat, always-visible list, matching the design.
+    const expandAll = (items: ShowcaseMenuItem[]) => {
+      items.forEach(item => {
+        if (item.children?.length) {
+          item.expanded = true;
+          expandAll(item.children);
+        }
+      });
+    };
+    expandAll(this.sections);
+  }
+
+  setTab(tab: 'features' | 'api'): void {
+    this.activeTab = tab;
+  }
+
   goTo(path: string, ev: Event) {
     ev.preventDefault();
     console.log('Showcase goTo', path);
@@ -39,5 +64,9 @@ export class ShowcaseComponent {
       return path === 'basic' || path === '';
     }
     return url === `/showcase/${path}` || url.endsWith(`/${path}`);
+  }
+
+  toggleMenu(item: ShowcaseMenuItem): void {
+    item.expanded = !item.expanded;
   }
 }

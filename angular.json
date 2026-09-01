@@ -31,7 +31,7 @@
             "buildTarget": "demo-app:build"
           }
         },
-         "storybook": {
+        "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "configDir": ".storybook",

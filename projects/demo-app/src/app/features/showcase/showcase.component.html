@@ -2,11 +2,83 @@
   <aside class="side-nav">
     <h3>Component</h3>
     <nav>
-      <a *ngFor="let s of sections" href="#" (click)="goTo(s.path, $event)" [class.active]="isActive(s.path)">{{s.label}}</a>
+      <ng-container *ngTemplateOutlet="
+          menuTemplate;
+          context: { $implicit: sections, depth: 0 }
+        ">
+      </ng-container>
     </nav>
   </aside>
 
   <main class="content">
-    <router-outlet></router-outlet>
+    <div class="doc-tabs">
+      <button type="button" class="doc-tab" [class.active]="activeTab === 'features'" (click)="setTab('features')">
+        FEATURES
+      </button>
+      <!-- <button type="button" class="doc-tab" [class.active]="activeTab === 'api'" (click)="setTab('api')">
+        API
+      </button> -->
+    </div>
+    <div class="content-body">
+      <router-outlet></router-outlet>
+    </div>
   </main>
 </div>
+
+
+<ng-template #menuTemplate let-items let-depth="depth">
+  <ng-container *ngFor="let item of items">
+
+    <!-- Top-level group: rendered as a static section header, children always visible -->
+    <div class="menu-item" *ngIf="depth === 0 && item.children?.length" [class.has-children]="true">
+
+      <h3 class="menu-group-title">{{ item.label }}</h3>
+
+      <div class="submenu submenu--group">
+        <ng-container *ngTemplateOutlet="
+            menuTemplate;
+            context: { $implicit: item.children, depth: depth + 1 }
+          ">
+        </ng-container>
+      </div>
+
+    </div>
+
+    <!-- Top-level leaf (no children) -->
+    <div class="menu-item" *ngIf="depth === 0 && !item.children?.length">
+      <a class="menu-link" [routerLink]="item.path" routerLinkActive="active">
+        {{ item.label }}
+      </a>
+    </div>
+
+    <!-- Nested item with its own children (e.g. Button > Import) -->
+    <div class="menu-item" *ngIf="depth > 0 && item.children?.length">
+
+      <button type="button" class="menu-button" (click)="toggleMenu(item)">
+
+        <span class="menu-link menu-link--group">
+          {{ item.label }}
+        </span>
+
+        <span class="arrow" [class.expanded]="item.expanded">›</span>
+      </button>
+
+      <div class="submenu" *ngIf="item.expanded">
+        <ng-container *ngTemplateOutlet="
+            menuTemplate;
+            context: { $implicit: item.children, depth: depth + 1 }
+          ">
+        </ng-container>
+      </div>
+
+    </div>
+
+    <!-- Nested leaf -->
+    <div class="menu-item" *ngIf="depth > 0 && !item.children?.length">
+      <a class="menu-link" [routerLink]="item.path" routerLinkActive="active">
+        {{ item.label }}
+      </a>
+    </div>
+
+  </ng-container>
+</ng-template>

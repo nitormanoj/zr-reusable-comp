@@ -1,6 +1,6 @@
 .app-header {
   min-height: 44px;
-  padding: 0 40px;
+  padding: 6px 0px 20px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,7 +15,8 @@
   color: var(--zr-color-text-primary);
   text-decoration: none;
 
-  strong, small {
+  strong,
+  small {
     display: block;
   }
 
