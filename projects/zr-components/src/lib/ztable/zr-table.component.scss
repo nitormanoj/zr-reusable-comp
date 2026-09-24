@@ -1,0 +1,237 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+
+  // PrimeNG table theme
+  --p-datatable-background: #ffffff;
+  --p-datatable-header-background: #f1f5f9;
+  --p-datatable-header-cell-background: #f1f5f9;
+  --p-datatable-header-cell-color: #111827;
+  --p-datatable-row-background: #ffffff;
+  --p-datatable-row-color: #111827;
+  --p-datatable-body-cell-color: #111827;
+  --p-datatable-border-color: #e2e8f0;
+
+  // PrimeNG paginator theme
+  --p-paginator-background: #ffffff;
+  --p-paginator-color: #334155;
+  --p-paginator-nav-button-color: #334155;
+  --p-paginator-nav-button-hover-background: #eff6ff;
+  --p-paginator-nav-button-hover-color: #1d4ed8;
+  --p-paginator-nav-button-selected-background: #2563eb;
+  --p-paginator-nav-button-selected-color: #ffffff;
+
+  // Rows-per-page dropdown
+  --p-select-background: #ffffff;
+  --p-select-color: #111827;
+  --p-select-border-color: #cbd5e1;
+  --p-select-dropdown-color: #334155;
+}
+
+
+.zr-table-container {
+  width: 100%;
+  max-width: 100%;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+
+.zr-table-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 350px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+
+  font-size: 14px;
+  outline: none;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+
+  &:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+}
+
+
+.checkbox-column {
+  width: 55px;
+  min-width: 55px;
+  text-align: center;
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    display: inline-grid;
+    place-content: center;
+
+    width: 18px;
+    height: 18px;
+    margin: 0;
+
+    background: #ffffff;
+    border: 1.5px solid #94a3b8;
+    border-radius: 4px;
+
+    cursor: pointer;
+    vertical-align: middle;
+
+    &::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      transform: scale(0);
+
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0, 43% 62%);
+    }
+
+    &:checked,
+    &:indeterminate {
+      background: #2563eb;
+      border-color: #2563eb;
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+
+    &:indeterminate::before {
+      width: 10px;
+      height: 2px;
+      clip-path: none;
+      transform: scale(1);
+    }
+
+    &:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// PRIMENG INTERNAL STYLES
+
+:host ::ng-deep {
+  .p-datatable,
+  .p-datatable-table {
+    background: #ffffff;
+    color: #111827;
+  }
+
+  // HEADER: explicit background and visible text
+  .p-datatable-thead > tr > th {
+    background: #f1f5f9 !important;
+    color: #111827 !important;
+    border-color: #e2e8f0;
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  .p-datatable-thead > tr > th.zr-column-header {
+    background: #f1f5f9 !important;
+    color: #111827 !important;
+  }
+
+  .p-datatable-tbody > tr {
+    background: #ffffff;
+    color: #111827;
+  }
+
+  .p-datatable-tbody > tr > td {
+    background: #ffffff;
+    color: #111827 !important;
+    border-color: #e2e8f0;
+  }
+
+  // PAGINATOR
+
+  .p-paginator {
+    background: #ffffff;
+    color: #334155;
+    border-color: #e2e8f0;
+  }
+
+  .p-paginator .p-paginator-page,
+  .p-paginator .p-paginator-first,
+  .p-paginator .p-paginator-prev,
+  .p-paginator .p-paginator-next,
+  .p-paginator .p-paginator-last {
+    color: #334155;
+    border-radius: 6px;
+  }
+
+  .p-paginator .p-paginator-page:hover,
+  .p-paginator .p-paginator-first:hover,
+  .p-paginator .p-paginator-prev:hover,
+  .p-paginator .p-paginator-next:hover,
+  .p-paginator .p-paginator-last:hover {
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+
+  .p-paginator .p-paginator-page.p-paginator-page-selected,
+  .p-paginator .p-paginator-page[aria-current="page"] {
+    background: #2563eb;
+    color: #ffffff;
+  }
+
+  .p-paginator .p-select {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #cbd5e1;
+  }
+
+  .p-paginator .p-select-label,
+  .p-paginator .p-select-dropdown {
+    color: #111827;
+  }
+
+  .p-paginator-current {
+    color: #475569;
+  }
+}
+
+.empty-message {
+  padding: 30px;
+  text-align: center;
+  color: #64748b;
+}
+
+
+@media (max-width: 768px) {
+  .zr-table-toolbar {
+    padding: 12px;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+}

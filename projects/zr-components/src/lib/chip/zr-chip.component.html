@@ -1,0 +1,50 @@
+<div
+  class="zr-chip-control"
+  [class.small]="controlSize === 'small'"
+  [class.medium]="controlSize === 'medium'"
+  [class.large]="controlSize === 'large'"
+  [class.full]="controlSize === 'full'"
+  [class.disabled]="disabled"
+  (click)="!disabled && chipInput.focus()"
+>
+
+  <!-- CHIP LIST -->
+
+  <div
+    class="zr-chip-item"
+    *ngFor="let value of values; let i = index"
+  >
+
+    <p-chip
+      [label]="value"
+      [removable]="false"
+      [style]="primeChipStyle"
+    ></p-chip>
+
+
+    <button
+      *ngIf="removable && !disabled"
+      type="button"
+      class="zr-chip-remove"
+      [attr.aria-label]="'Remove ' + value"
+      (click)="$event.stopPropagation(); removeChip(i)"
+    >
+      &times;
+    </button>
+
+  </div>
+
+  <input
+    #chipInput
+    type="text"
+    class="zr-chip-input"
+    [value]="inputValue"
+    [placeholder]="values.length === 0 ? placeholder : ''"
+    [disabled]="disabled"
+    (input)="inputValue = chipInput.value"
+    (keydown)="onKeyDown($event)"
+    (blur)="markTouched()"
+    aria-label="Add chip"
+  />
+
+</div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ZrButtonsComponent } from 'ui-table';
+// import { ZrButtonsComponent } from 'ui-table';
 
 @Component({
   selector: 'import',
