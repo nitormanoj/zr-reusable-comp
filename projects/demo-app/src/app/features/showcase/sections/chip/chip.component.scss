@@ -1,0 +1,17 @@
+.chip-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.description {
+  margin-top: -12px;
+  color: #000000;
+}
+
+.chip-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}

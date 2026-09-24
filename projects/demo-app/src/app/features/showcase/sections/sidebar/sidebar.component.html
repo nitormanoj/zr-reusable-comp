@@ -1,0 +1,62 @@
+<div class="sidebar-showcase">
+  <h1>Sidebar</h1>
+
+  <p class="description">
+    Sidebar is a reusable wrapper around PrimeNG Drawer.
+  </p>
+
+  <sc-example-panel title="Basic" [code]="basicCode">
+    <button type="button" class="demo-button" (click)="openBasic()">
+      Open Sidebar
+    </button>
+
+    <zr-sidebar
+      header="Project Details"
+      position="right"
+      width="30rem"
+      [(visible)]="basicVisible"
+    >
+      <div class="sidebar-content">
+        <h3>Construction Project</h3>
+      </div>
+    </zr-sidebar>
+  </sc-example-panel>
+
+  <sc-example-panel title="Position" [code]="positionCode">
+    <div class="button-group">
+      <button type="button" class="demo-button" (click)="openLeft()">
+        Left
+      </button>
+
+      <button type="button" class="demo-button" (click)="openRight()">
+        Right
+      </button>
+    </div>
+
+    <zr-sidebar
+      header="Left Sidebar"
+      position="left"
+      width="30rem"
+      [(visible)]="leftVisible"
+    >
+      <div class="sidebar-content">
+        <h3>Left Sidebar</h3>
+
+        <p>This sidebar opens from the left.</p>
+      </div>
+    </zr-sidebar>
+
+    <zr-sidebar
+      header="Right Sidebar"
+      position="right"
+      width="30rem"
+      [(visible)]="rightVisible"
+    >
+      <div class="sidebar-content">
+        <h3>Right Sidebar</h3>
+
+        <p>This sidebar opens from the right.</p>
+      </div>
+    </zr-sidebar>
+  </sc-example-panel>
+</div>

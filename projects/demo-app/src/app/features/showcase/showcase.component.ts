@@ -29,8 +29,12 @@ export class ShowcaseComponent {
     { path: 'custom-templates', label: 'Custom templates' },
     { path: 'loading-state', label: 'Loading state' },
     { path: 'theming', label: 'Theming' },
+    { path: 'chip', label: 'Chip' },
+    { path: 'sidebar', label: 'Sidebar' },
+    { path: 'table', label: 'table' },
     { path: 'api-reference', label: 'API reference' }
   ];
+  activeTab: string = ""
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
