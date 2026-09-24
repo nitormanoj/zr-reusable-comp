@@ -1,0 +1,203 @@
+:host {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+}
+
+
+.zr-chip-control {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  align-content: center;
+
+  gap: 6px;
+
+  box-sizing: border-box;
+
+  max-width: 100%;
+  min-width: 0;
+
+  padding: 6px 10px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  cursor: text;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:focus-within {
+
+    border-color: #2563eb;
+
+    box-shadow:
+      0 0 0 3px rgba(37, 99, 235, 0.12);
+
+  }
+
+}
+
+
+.zr-chip-control.small {
+
+  width: 200px;
+  min-height: 36px;
+
+}
+
+
+
+.zr-chip-control.medium {
+
+  width: 350px;
+  min-height: 42px;
+
+}
+
+.zr-chip-control.large {
+
+  width: 500px;
+  min-height: 48px;
+
+}
+
+.zr-chip-control.full {
+
+  width: 100%;
+  min-height: 42px;
+
+}
+
+
+.zr-chip-item {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  max-width: 100%;
+  min-width: 0;
+
+  padding: 4px 8px;
+
+  border-radius: 16px;
+
+  background: #111827;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  box-sizing: border-box;
+
+
+  p-chip {
+
+    display: inline-flex;
+
+    max-width: 100%;
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+
+  }
+
+}
+
+
+.zr-chip-remove {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 16px;
+  height: 16px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  &:hover {
+
+    background: rgba(255, 255, 255, 0.2);
+
+  }
+
+}
+
+
+.zr-chip-input {
+
+  flex: 1 1 70px;
+
+  min-width: 0;
+
+  width: 0;
+
+  max-width: 100%;
+
+  padding: 4px 2px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #111827;
+
+  font-size: 13px;
+
+  box-sizing: border-box;
+
+  &::placeholder {
+
+    color: #94a3b8;
+
+  }
+
+}
+
+
+.zr-chip-control.disabled {
+
+  background: #f1f5f9;
+
+  border-color: #e2e8f0;
+
+  opacity: 0.65;
+
+  cursor: not-allowed;
+
+  .zr-chip-input {
+
+    cursor: not-allowed;
+
+  }
+
+}

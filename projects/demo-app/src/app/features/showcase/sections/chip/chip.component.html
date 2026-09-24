@@ -1,0 +1,32 @@
+<div class="chip-showcase">
+  <h1>Chip</h1>
+
+  <p class="description">
+    Chips display compact information such as status, categories and selections.
+  </p>
+
+  <h4>Basic</h4>
+  <sc-example-panel title="Basic" [code]="basicCode">
+    <zr-chip
+      [(ngModel)]="values"
+      separator=","
+      placeholder="Type and press Enter"
+      controlSize="small"
+      allowDuplicates="true"
+    >
+    </zr-chip>
+  </sc-example-panel>
+
+  <h4>Removable</h4>
+  <sc-example-panel title="Removable" [code]="removableCode">
+    <div class="chip-row">
+      <zr-chip
+        [(ngModel)]="removableValues"
+        separator=","
+        removable="true"
+        placeholder="Type and press Enter"
+      >
+      </zr-chip>
+    </div>
+  </sc-example-panel>
+</div>
