@@ -1,0 +1,21 @@
+<p-drawer
+  [visible]="visible"
+  (visibleChange)="onVisibleChange($event)"
+  [header]="header"
+  [position]="position"
+  [modal]="modal"
+  [dismissible]="dismissible"
+  [closeOnEscape]="closeOnEscape"
+  [showCloseIcon]="showCloseIcon"
+  [blockScroll]="blockScroll"
+  [styleClass]="'zr-sidebar ' + styleClass"
+  [style]="{
+    width: position === 'left' || position === 'right' ? width : undefined,
+  }"
+  (onShow)="onShow()"
+  (onHide)="onHide()"
+>
+  <div class="zr-sidebar__content">
+    <ng-content></ng-content>
+  </div>
+</p-drawer>
