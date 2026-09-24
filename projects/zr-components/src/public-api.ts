@@ -8,5 +8,5 @@ export * from './lib/breadcrumb/zr-breadcrumb.component';
 export * from './lib/breadcrumb/zr-breadcrumb.types';
 export * from './lib/chip/zr-chip.component';
 export * from './lib/sidebar/zr-sidebar.component'
-export * from './lib/ptable/zr-table.component';
-export * from './lib/ptable/zr-table.types';
+export * from './lib/ztable/zr-table.component';
+export * from './lib/ztable/zr-table.types';
