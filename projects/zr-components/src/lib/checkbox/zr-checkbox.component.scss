@@ -1,15 +1,127 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
 .zr-checkbox {
   display: inline-flex;
   align-items: center;
-  gap: var(--zr-spacing-control-gap, 0.5rem);
+  gap: var(--zr-checkbox-gap, 0.5rem);
+  min-height: 20px;
+  line-height: 20px;
   cursor: pointer;
 }
 
-.zr-checkbox .label {
+.zr-checkbox-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  flex: 0 0 20px;
+  line-height: 0;
+}
+
+:host ::ng-deep .zr-checkbox-control {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  line-height: 0 !important;
+}
+
+:host ::ng-deep .zr-checkbox-control .p-checkbox-box {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 2px solid
+    var(--zr-checkbox-border-color, #64748b) !important;
+  border-radius: 4px !important;
+  background:
+    var(--zr-checkbox-background, #ffffff) !important;
+  line-height: 0 !important;
+  overflow: hidden;
+}
+
+:host
+  ::ng-deep
+  .zr-checkbox-control.p-checkbox-checked
+  .p-checkbox-box {
+  background:
+    var(--zr-checkbox-checked-background, #4f46e5) !important;
+  border-color:
+    var(--zr-checkbox-checked-border-color, #4f46e5) !important;
+}
+
+:host
+  ::ng-deep
+  .zr-checkbox-control
+  .p-checkbox-box.p-highlight {
+  background:
+    var(--zr-checkbox-checked-background, #4f46e5) !important;
+  border-color:
+    var(--zr-checkbox-checked-border-color, #4f46e5) !important;
+}
+
+:host ::ng-deep .zr-checkbox-control .p-checkbox-icon {
+  width: 12px !important;
+  height: 12px !important;
+  max-width: 12px !important;
+  max-height: 12px !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color:
+    var(--zr-checkbox-check-color, #ffffff) !important;
+}
+
+:host ::ng-deep .zr-checkbox-control svg.p-checkbox-icon {
+  width: 12px !important;
+  height: 12px !important;
+  display: block !important;
+}
+
+:host
+  ::ng-deep
+  .zr-checkbox-control
+  .p-checkbox-icon
+  path {
+  stroke:
+    var(--zr-checkbox-check-color, #ffffff) !important;
+}
+.zr-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color:
+    var(--zr-checkbox-label-color, #1e293b);
+  cursor: pointer;
   user-select: none;
 }
 
-.zr-checkbox:has(.p-checkbox-disabled) {
+.zr-checkbox--disabled {
+  opacity: 0.6;
   cursor: not-allowed;
-  opacity: 0.65;
+}
+
+.zr-checkbox--disabled .zr-checkbox-label {
+  cursor: not-allowed;
 }
