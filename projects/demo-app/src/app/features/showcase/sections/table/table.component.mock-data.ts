@@ -1,4 +1,4 @@
-import { ZrTableColumn, ZrTableRow } from "projects/zr-components/src/lib/ptable/zr-table.types";
+import { ZrTableColumn, ZrTableRow } from "projects/zr-components/src/lib/ztable/zr-table.types";
 
  export const columns: ZrTableColumn[] = [
     { field: 'id', header: 'ID', width: '80px' },

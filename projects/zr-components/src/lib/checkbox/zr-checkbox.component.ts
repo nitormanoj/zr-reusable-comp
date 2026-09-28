@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {ChangeDetectionStrategy,Component,EventEmitter,Input,Output} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'zr-checkbox',
   standalone: true,
-  imports: [CheckboxModule, FormsModule],
+  imports: [CommonModule,FormsModule,CheckboxModule],
   templateUrl: './zr-checkbox.component.html',
   styleUrls: ['./zr-checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,7 @@ export class ZrCheckboxComponent {
   @Output() checkedChange = new EventEmitter<boolean>();
 
   onCheckedChange(value: boolean): void {
+    this.checked = value;
     this.checkedChange.emit(value);
   }
 }
