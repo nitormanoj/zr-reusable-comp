@@ -1,0 +1,76 @@
+:host { display: block; font-family: 'Segoe UI', Arial, sans-serif; color: #292d30; background: #fff; }
+* { box-sizing: border-box; }
+button { font: inherit; cursor: pointer; color: inherit; }
+button:focus-visible { outline: 2px solid #00858b; outline-offset: 2px; }
+.workspace { min-height: 100%; padding: 17px 14px 14px; }
+.workspace-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 13px; }
+.back, .settings { border: 0; background: transparent; padding: 4px; color: #666e73; }
+.back { align-self: flex-start; }
+h1 { margin: 0; font-size: 16px; font-weight: 600; color: #242729; }
+p { margin: 0; font-size: 11px; color: #50545a; }
+.tabs { display: flex; border-bottom: 1px solid #dce0e4; gap: 0; }
+.tabs button { border: 0; border-bottom: 1px solid transparent; background: transparent; padding: 12px 10px 9px; font-size: 12px; color: #666b71; }
+.tabs button.active { border-bottom-color: #66babe; color: #007e85; }
+h2 { font-size: 13px; font-weight: 500; margin: 0; color: #242729; }
+.graph-section { padding-top: 19px; }
+.graph-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+.graph-layout { display: flex; gap: 28px; align-items: flex-start; }
+.specimen-list { flex: 0 0 160px; padding-top: 4px; }
+h3 { font-size: 12px; font-weight: 500; margin: 0; color: #242729; }
+.legend-table { border: 1px solid #d1d6dc; border-radius: 5px 5px 0 0; overflow: hidden; margin-top: 20px; max-height: 370px; overflow-y: auto; }
+.legend-heading, .legend-table button { display: grid; grid-template-columns: 45px 1fr; align-items: center; text-align: left; gap: 5px; padding: 8px 9px; font-size: 10px; color: #3b4c64; }
+.legend-heading { background: #eaecee; }
+.legend-table button { border: 0; border-bottom: 1px solid #e6eaf0; background: white; width: 100%; }
+.legend-table button:hover { background: #f1f7f7; }
+.legend-table button.dimmed { opacity: .4; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+.chart-scroll { min-width: 0; flex: 1; overflow-x: auto; }
+.settings-anchor { position: relative; }
+.settings { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; }
+.settings.open { color: #16868a; background: #e9f5f5; }
+.axis-popover { position: absolute; z-index: 20; top: calc(100% + 4px); right: 0; width: 204px; max-width: calc(100vw - 40px); background: white; border: 1px solid #d8dcdf; border-radius: 5px; box-shadow: 0 5px 9px #0003; color: #393f42; font-family: 'Segoe UI', Arial, sans-serif; }
+.axis-sections { padding: 0 13px; max-height: min(430px, 60dvh); overflow-y: auto; }
+.axis-section + .axis-section { border-top: 1px solid #d7dce0; }
+.axis-toggle { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 13px 0; border: 0; background: transparent; text-align: left; font-size: 10px; font-weight: 500; }
+.axis-toggle i { color: #687278; font-size: 11px; }
+.axis-fields { display: flex; flex-direction: column; gap: 12px; padding-bottom: 9px; }
+.log-option { display: flex; align-items: center; gap: 4px; font-size: 9px; color: #5d6266; }
+.axis-field { display: flex; flex-direction: column; gap: 3px; font-size: 9px; color: #656c70; }
+.limits { display: flex; gap: 8px; }
+.settings-footer { border-top: 1px solid #d8dde1; padding: 12px 13px 13px; display: flex; justify-content: flex-end; gap: 13px; }
+.settings-footer button { height: 28px; border-radius: 3px; font-size: 10px; padding: 0 17px; }
+.clear-settings { border: 0; color: #00868b; background: transparent; }
+.apply-settings { border: 1px solid #45a2a5; color: white; background: #178387; }
+.settings-error { padding: 8px 13px; color: #c72e38; font-size: 10px; }
+.statistics { margin-top: 22px; }
+.statistics h2 { margin-bottom: 9px; }
+.summary { background: #fafbfc; }
+.insights { padding: 20px 0 4px; width: 510px; max-width: 100%; }
+.insights .kpi-heading { font-size: 12px; font-weight: 600; color: #45484b; margin-bottom: 9px; }
+.insight-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.insight-cards article { border: 1px solid #d6dadd; border-radius: 7px; padding: 9px 8px 7px; min-height: 100px; box-shadow: 0 3px 7px #26344212; }
+.badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 5px; border-radius: 3px; font-size: 8px; line-height: 1.2; }
+.badge.success { background: #dcfce7; color: #249951; }
+.badge.warning { background: #ffedd5; color: #e36921; }
+.badge.danger { background: #ffe0e3; color: #df3d48; }
+.insight-cards h3 { font-size: 12px; margin-top: 8px; line-height: 1.3; }
+.insight-cards strong { display: block; margin-top: 3px; font-size: 24px; line-height: 1.15; font-weight: 700; color: #424548; }
+.insight-cards p { margin-top: 4px; font-size: 10px; color: #50545a; }
+.alerts { margin-top: 15px; }
+.alerts h2 { font-size: 12px; margin-bottom: 9px; }
+.alert { display: flex; align-items: flex-start; gap: 5px; padding: 8px; border-left: 2px solid; margin-bottom: 8px; }
+.alert:last-child { margin-bottom: 0; }
+.alert > i { font-size: 10px; line-height: 15px; flex-shrink: 0; }
+.alert h3 { font-size: 11px; font-weight: 500; color: inherit; line-height: 15px; }
+.alert p { font-size: 10px; line-height: 1.35; color: #43536a; margin-top: 4px; }
+.alert.success { background: #f0fdf5; border-color: #4dcd7d; color: #00862d; }
+.alert.info { background: #eff6ff; border-color: #c5dafe; color: #397bff; }
+.alert.warning { background: #fff8ef; border-color: #ffd5a5; color: #dc8800; }
+.alert.danger { background: #fff2f3; border-color: #ffb6bd; color: #f11a25; }
+@media (max-width: 700px) { .graph-layout { flex-direction: column; gap: 12px; } .specimen-list { flex: auto; width: 100%; } .legend-table { max-height: 160px; margin-top: 10px; } .chart-scroll { width: 100%; } .insight-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 380px) { .insight-cards { grid-template-columns: 1fr; } }
+
+p-chart { display: block; min-width: 560px; }
+.axis-popover { width: 246px; }
+
+.limits p-inputnumber { flex: 1 1 0; min-width: 0; }

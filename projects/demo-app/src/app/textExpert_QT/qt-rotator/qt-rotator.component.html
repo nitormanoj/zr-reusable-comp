@@ -1,0 +1,414 @@
+<!-- CONFIGURATION SCREEN -->
+
+<section class="setup-layout screen-enter">
+  <div class="setup-workspace">
+    <div class="setup-titlebar">
+      <h1>New Test Setup - {{ selectedTargetType }}</h1>
+
+      <button type="button" class="text-action">Add to a testing method</button>
+    </div>
+
+    <div class="setup-canvas">
+      <!-- Inner section navigation -->
+
+      <nav class="setup-steps" aria-label="Testing setup sections">
+        <button
+          type="button"
+          *ngFor="let section of setupSections"
+          [class.selected]="activeSection === section"
+          (click)="selectSection(section)"
+        >
+          <span>{{ section }}</span>
+        </button>
+      </nav>
+
+      <!-- Animated rings and connection points -->
+
+      <div #orbitViewport class="sensor-visual" [style.--sensor-scale]="orbitSize().height / 680" aria-label="Available measurement devices">
+        <!-- Curves and markers share one SVG coordinate system. -->
+
+        <svg
+          class="sensor-orbits"
+          [attr.viewBox]="'0 0 ' + orbitSize().width + ' ' + orbitSize().height"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <!-- Subtle curved background bands, matching the QML orbit -->
+
+          <path
+            [attr.d]="orbitBand(0)"
+            fill="#f5fafa"
+          />
+
+          <path
+            [attr.d]="orbitBand(1)"
+            fill="#fafdfd"
+          />
+
+          <!-- Main dark teal curved line -->
+
+          <path class="orbit-path orbit-inner" [attr.d]="orbitPath(0)" />
+
+          <!-- Outer light teal curves -->
+
+          <path class="orbit-path orbit-outer" [attr.d]="orbitPath(1)" />
+
+          <path class="orbit-path orbit-outer" [attr.d]="orbitPath(2)" />
+
+          <!-- Top dot -->
+
+          <circle
+            *ngIf="hasTopSensor"
+            class="orbit-marker"
+            [attr.cx]="orbitPoint(0.2).x"
+            [attr.cy]="orbitPoint(0.2).y"
+            r="6"
+          />
+
+          <!-- Center marker -->
+
+          <g class="orbit-center-marker">
+            <circle [attr.cx]="orbitPoint(0.5).x" [attr.cy]="orbitPoint(0.5).y" r="13" class="marker-outer" />
+
+            <circle [attr.cx]="orbitPoint(0.5).x" [attr.cy]="orbitPoint(0.5).y" r="9" class="marker-white" />
+
+            <circle [attr.cx]="orbitPoint(0.5).x" [attr.cy]="orbitPoint(0.5).y" r="5" class="marker-core" />
+          </g>
+
+          <!-- Bottom dot -->
+
+          <circle
+            *ngIf="hasBottomSensor"
+            class="orbit-marker"
+            [attr.cx]="orbitPoint(0.8).x"
+            [attr.cy]="orbitPoint(0.8).y"
+            r="6"
+          />
+        </svg>
+
+        <div class="sensor-cards">
+          <article
+            class="sensor-card"
+            *ngFor="let sensor of sensors; trackBy: trackBySensorId"
+            [attr.data-sensor-id]="sensor.id"
+            [class.is-selected]="selectedSensorId === sensor.id"
+            [class.has-link]="!sensor.linked"
+            [class.sensor-card-top]="getSensorPosition(sensor.id) === 'top'"
+            [class.sensor-card-middle]="
+              getSensorPosition(sensor.id) === 'middle'
+            "
+            [class.sensor-card-bottom]="
+              getSensorPosition(sensor.id) === 'bottom'
+            "
+            [style.left.%]="cardLeftPercent(sensor.id)"
+            [style.top.%]="cardTopPercent(sensor.id)"
+            [style.opacity]="cardOpacity(sensor.id)"
+            [style.pointer-events]="
+              cardOpacity(sensor.id) < 0.05 ? 'none' : 'auto'
+            "
+          >
+            <button
+              type="button"
+              class="sensor-select"
+              (click)="selectSensor(sensor.id)"
+              [attr.aria-label]="'Select ' + sensor.name"
+            >
+              <span *ngIf="sensor.id === 'video-2' || sensor.id === 'video-hp'; else standardSensorImage" class="sensor-image-frame">
+                <img [src]="sensor.image" [alt]="sensor.name" [class.card01-image]="sensor.image.endsWith('/card01.png')" />
+              </span>
+              <ng-template #standardSensorImage><img [src]="sensor.image" [alt]="sensor.name" /></ng-template>
+
+              <span class="sensor-info">
+                <strong>{{ sensor.name }}</strong>
+
+                <small>{{ sensor.model }} · {{ sensor.serial }}</small>
+
+                <em
+                  *ngIf="sensor.linked && !sensor.warning"
+                  class="sensor-status linked"
+                  >✓ Linked</em
+                >
+
+                <em *ngIf="sensor.warning" class="sensor-status warning"
+                  >⚠ {{ sensor.warning }}</em
+                >
+              </span>
+            </button>
+
+            <button
+              *ngIf="!sensor.linked"
+              type="button"
+              class="link-sensor"
+              (click)="$event.stopPropagation(); toggleSensorLink(sensor)"
+            >
+              Link
+            </button>
+          </article>
+        </div>
+      </div>
+
+      <div class="machine-stage">
+        <img
+          src="/assets/qt-machines/testing-machine.png"
+          alt="ZwickRoell testing machine"
+          class="setup-machine-image"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SETTINGS PANEL -->
+
+  <aside class="settings-panel">
+    <div class="settings-header" *ngIf="!showConfigureDialog">
+      <h2>{{ activeSection }}</h2>
+
+      <button
+        type="button"
+        aria-label="Close setup"
+        class="settings-close"
+        (click)="closeSetup()"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <div class="settings-body" *ngIf="!showConfigureDialog">
+      <div class="device-toolbar">
+        <select
+          aria-label="Selected sensor"
+          [ngModel]="selectedSensorId"
+          (ngModelChange)="selectSensor($event)"
+          disabled
+        >
+          <option *ngFor="let sensor of sensors" [value]="sensor.id">
+            {{ sensor.name }}
+          </option>
+        </select>
+
+        <button
+          type="button"
+          class="outline-button"
+          (click)="configureSensor()"
+        >
+          Configure
+        </button>
+      </div>
+
+      <!-- Warning only for VideoXtens 2-120 HP -->
+
+      <div
+        *ngIf="selectedSensor?.name === 'VideoXtens 2-120 HP'"
+        class="calibration-warning"
+        role="status"
+      >
+        <strong>
+          <i class="bi bi-exclamation-triangle"></i>
+
+          Calibration expires in 21 days
+        </strong>
+
+        <p>
+          Valid for this test.<br />
+
+          Recalibrate before 21st October 2026 to stay compliant.
+        </p>
+      </div>
+
+      <!-- Warning only for unlinked Clip-On Extensometer -->
+
+      <div
+        *ngIf="
+          selectedSensor?.name === 'Clip-On Extensometer' &&
+          !selectedSensor?.linked
+        "
+        class="calibration-warning"
+        role="status"
+      >
+        <strong>
+          <i class="bi bi-exclamation-triangle"></i>
+
+          Not Linked
+        </strong>
+
+        <p>Link this device to calibrate it</p>
+      </div>
+
+      <div class="settings-field">
+        <label for="gauge-length">Initial gauge length L₀</label>
+
+        <div class="number-control">
+          <input
+            id="gauge-length"
+            type="number"
+            min="0"
+            [(ngModel)]="initialGaugeLength"
+          /><span>mm</span>
+        </div>
+      </div>
+
+      <div class="settings-field">
+        <label for="field-of-view">Field of View</label>
+
+        <div class="number-control">
+          <input
+            id="field-of-view"
+            type="number"
+            min="0"
+            [(ngModel)]="fieldOfView"
+          /><span>mm</span>
+        </div>
+      </div>
+
+      <fieldset class="pattern-group">
+        <legend>Target Type</legend>
+
+        <label *ngFor="let pattern of ['Pattern', 'Dot', 'Line']"
+          ><input
+            type="radio"
+            name="strainPattern"
+            [value]="pattern"
+            [(ngModel)]="strainPattern"
+          /><span>{{ pattern }}</span></label
+        >
+      </fieldset>
+
+      <div class="capabilities">
+        <button
+          type="button"
+          class="capabilities-toggle"
+          [attr.aria-expanded]="capabilitiesExpanded"
+        >
+          <strong>System Capabilities</strong>
+
+          <span class="capabilities-icon">
+            {{ "+" }}
+          </span>
+        </button>
+      </div>
+
+      <p class="setup-message" *ngIf="setupMessage" role="status">
+        {{ setupMessage }}
+      </p>
+    </div>
+
+    <div class="settings-footer" *ngIf="!showConfigureDialog">
+      <button type="button" class="outline-button" (click)="previousSection()">
+        Previous
+      </button>
+
+      <button type="button" class="primary-button" (click)="applyAndGoNext()">
+        Apply and Go Next
+      </button>
+    </div>
+
+    <section
+      *ngIf="showConfigureDialog"
+      class="configure-panel"
+      aria-label="Configure Strain"
+    >
+      <header class="configure-header">
+        <button
+          type="button"
+          aria-label="Back"
+          (click)="closeConfigureDialog()"
+        >
+          ←
+        </button>
+
+        <h2 id="configure-strain-title">Configure Strain</h2>
+
+        <button
+          type="button"
+          aria-label="Close"
+          (click)="closeConfigureDialog()"
+        >
+          ×
+        </button>
+      </header>
+
+      <div class="configure-content">
+        <section class="configure-group" *ngFor="let group of configureGroups">
+          <button
+            type="button"
+            class="configure-group-toggle"
+            [attr.aria-expanded]="expandedConfigureGroup === group.id"
+            (click)="toggleConfigureGroup(group.id)"
+          >
+            <strong>{{ group.title }}</strong>
+
+            <span>{{ "+" }}</span>
+          </button>
+        </section>
+
+        <div class="configure-field">
+          <label for="edge-sensitivity">Edge Detection Sensitivity</label>
+
+          <select
+            id="edge-sensitivity"
+            [(ngModel)]="edgeDetectionSensitivity"
+            disabled
+          >
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+          </select>
+        </div>
+
+        <div class="configure-field">
+          <label for="mark-loss">Mark Loss Behavior</label>
+
+          <select id="mark-loss" [(ngModel)]="markLossBehavior" disabled>
+            <option>Pause Test</option>
+            <option>Continue</option>
+          </select>
+        </div>
+
+        <div class="configure-field image-filtering">
+          <label for="image-filter">Image Filtering</label>
+
+          <span>Off</span>
+
+          <input
+            id="image-filter"
+            type="checkbox"
+            [(ngModel)]="imageFiltering"
+            disabled
+          />
+
+          <span>On</span>
+        </div>
+
+        <section class="configure-group">
+          <button
+            type="button"
+            class="configure-group-toggle"
+            [attr.aria-expanded]="calibrationExpanded"
+          >
+            <strong>Detailed Calibration Management</strong>
+
+            <span>{{ "+" }}</span>
+          </button>
+        </section>
+      </div>
+
+      <footer class="configure-footer">
+        <button
+          type="button"
+          class="outline-button"
+          (click)="closeConfigureDialog()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="saveConfigureDialog()"
+        >
+          Save
+        </button>
+      </footer>
+    </section>
+  </aside>
+</section>

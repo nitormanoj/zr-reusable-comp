@@ -1,0 +1,262 @@
+<div class="qt-app" [class.setup-view]="screen === 'setup'">
+  <!-- Shared testXpert top bar -->
+
+  <header class="qt-header">
+    <div class="header-left">
+      <button
+        type="button"
+        class="icon-btn"
+        aria-label="Application menu"
+        (click)="onHeaderAction('app-menu')"
+      >
+        <svg class="app-menu-grid" viewBox="0 0 18 18" aria-hidden="true" focusable="false" fill="currentColor">
+          <rect x="0" y="0" width="5" height="5" rx=".8" /><rect x="6.5" y="0" width="5" height="5" rx=".8" /><rect x="13" y="0" width="5" height="5" rx=".8" />
+          <rect x="0" y="6.5" width="5" height="5" rx=".8" /><rect x="6.5" y="6.5" width="5" height="5" rx=".8" fill="#ed2028" /><rect x="13" y="6.5" width="5" height="5" rx=".8" />
+          <rect x="0" y="13" width="5" height="5" rx=".8" /><rect x="6.5" y="13" width="5" height="5" rx=".8" /><rect x="13" y="13" width="5" height="5" rx=".8" />
+        </svg>
+      </button>
+
+      <div class="app-logo" *ngIf="screen !== 'documents'">test<span>X</span>pert</div>
+      <div class="app-logo" *ngIf="screen === 'documents'">Test Data <span>M</span>anagement</div>
+
+      <nav *ngIf="screen !== 'documents'" class="breadcrumb" aria-label="Breadcrumb">
+        <ng-container *ngFor="let item of breadcrumbs; let last = last">
+          <span>{{ item }}</span
+          ><span *ngIf="!last" class="separator">/</span>
+        </ng-container>
+      </nav>
+    </div>
+
+    <div class="header-right">
+      <button
+        type="button"
+        class="icon-btn muted-icon"
+        aria-label="Shield disabled"
+        (click)="onHeaderAction('sound')"
+      >
+        <i class="bi bi-shield-slash"></i>
+      </button>
+
+      <span class="header-divider"></span>
+
+      <button
+        type="button"
+        class="icon-btn"
+        aria-label="Notifications"
+        (click)="onHeaderAction('notifications')"
+      >
+        <i class="bi bi-bell"></i>
+      </button>
+
+      <button
+        type="button"
+        class="icon-btn"
+        aria-label="Settings"
+        (click)="onHeaderAction('settings')"
+      >
+        <i class="bi bi-gear"></i>
+      </button>
+
+      <span class="header-divider"></span>
+
+      <button
+        type="button"
+        class="user-avatar"
+        aria-label="Profile"
+        (click)="onHeaderAction('profile')"
+      >
+        RS
+      </button>
+
+      <span class="header-divider"></span>
+
+      <div class="company-logo">Zwick<span>/</span>Roell</div>
+    </div>
+  </header>
+
+  <div class="qt-body">
+    <aside *ngIf="!analysisOpen" class="qt-sidebar" aria-label="Main navigation">
+      <div class="sidebar-top">
+        <button
+          *ngFor="let item of sidebarItems"
+          type="button"
+          class="sidebar-item"
+          [class.active]="activeMenu === item.id"
+          [attr.aria-label]="item.label"
+          [attr.title]="item.label"
+          (click)="selectMenu(item.id)"
+        >
+          <svg *ngIf="item.id === 'documents'; else standardNavIcon" class="documents-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true" focusable="false">
+            <rect x="3" y="3" width="18" height="18" />
+            <path d="M3 7h18M7 3v18M10 16l3-3 2.5 2 3.5-4.5" />
+          </svg>
+          <ng-template #standardNavIcon><i class="bi" [ngClass]="item.icon"></i></ng-template>
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="sidebar-item"
+        aria-label="Collapse sidebar"
+        (click)="onHeaderAction('collapse-sidebar')"
+      >
+        <i class="bi bi-layout-sidebar-inset"></i>
+      </button>
+    </aside>
+
+    <main class="qt-content" [class.analysis-content]="analysisOpen" [class.documents-content]="screen === 'documents'">
+      <app-qt-documents *ngIf="screen === 'documents'" (workspaceChange)="analysisOpen = $event"></app-qt-documents>
+      <!-- LANDING PAGE -->
+
+      <section
+        *ngIf="screen === 'landing'"
+        class="landing-container screen-enter"
+      >
+        <div class="section-heading"><h2>New</h2></div>
+
+        <div class="new-section">
+          <button
+            type="button"
+            class="create-card"
+            (click)="createTestingSystem()"
+          >
+            <span class="create-icon"><i class="bi bi-plus-lg"></i></span>
+
+            <span class="create-title">Create A New Testing System</span>
+          </button>
+        </div>
+
+        <div class="section-heading recent-heading"><h2>Recent</h2></div>
+
+        <div class="testing-grid">
+          <button
+            type="button"
+            class="testing-card"
+            *ngFor="let system of testingSystems; trackBy: trackBySystemId"
+            (click)="openTestingSystem(system)"
+          >
+            <div class="machine-image">
+              <img [src]="system.image" [alt]="system.name" loading="lazy" />
+            </div>
+
+            <div class="machine-details">
+              <h3 style="color: #212324">{{ system.name }}</h3>
+
+              <p class="modified-date">Modified: {{ system.modifiedAt }}</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <app-qt-rotator
+        *ngIf="screen === 'setup'"
+        [selectedTargetType]="selectedTargetType"
+        (closed)="closeSetup()"
+      ></app-qt-rotator>
+    </main>
+  </div>
+
+  <!-- CREATE SETUP MODAL -->
+
+  <div
+    *ngIf="showCreateDialog"
+    class="qt-dialog-overlay"
+    (click)="closeCreateDialog()"
+  >
+    <section
+      class="qt-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="qt-dialog-title"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Header -->
+
+      <div class="qt-dialog-header">
+        <h2 id="qt-dialog-title">Create A New Testing Setup</h2>
+
+        <button
+          type="button"
+          class="qt-dialog-close"
+          aria-label="Close dialog"
+          (click)="closeCreateDialog()"
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <!-- Form -->
+
+      <form
+        id="qt-create-form"
+        class="qt-dialog-form"
+        (ngSubmit)="startSetup()"
+      >
+        <!-- Target Type -->
+
+        <div class="qt-form-group">
+          <span class="qt-field-label"> Target Type </span>
+
+          <div class="qt-radio-group">
+            <label class="qt-radio-option" *ngFor="let type of targetTypes">
+              <input
+                type="radio"
+                name="targetType"
+                [value]="type"
+                [ngModel]="selectedTargetType"
+                (ngModelChange)="onTargetTypeChange($event)"
+              />
+
+              <span>{{ type }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Test Standard -->
+
+        <div class="qt-form-group">
+          <label class="qt-field-label" for="qt-test-standard">
+            Test Standard
+          </label>
+
+          <p-select
+            inputId="qt-test-standard" name="testStandard"
+            [options]="testStandards" optionLabel="label" optionValue="value"
+            [(ngModel)]="selectedStandard" appendTo="body"
+            [overlayOptions]="{ baseZIndex: 10000 }"
+            styleClass="qt-setup-standard" panelStyleClass="qt-setup-standard-panel"
+          />
+        </div>
+
+        <!-- Label -->
+
+        <div class="qt-form-group">
+          <label class="qt-field-label" for="qt-testing-label"> Label </label>
+
+          <input
+            id="qt-testing-label"
+            class="qt-text-input"
+            type="text"
+            name="testingLabel"
+            [(ngModel)]="testingLabel"
+            required
+            placeholder="Enter testing setup name"
+          />
+        </div>
+      </form>
+
+      <!-- Footer -->
+
+      <div class="qt-dialog-footer">
+        <button
+          type="submit"
+          form="qt-create-form"
+          class="primary-button"
+          [disabled]="!testingLabel.trim()"
+        >
+          Start Setup
+        </button>
+      </div>
+    </section>
+  </div>
+</div>
