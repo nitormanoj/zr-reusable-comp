@@ -1,0 +1,64 @@
+<app-qt-analysis *ngIf="showAnalysis" [specimens]="analysisRows" (closed)="closeAnalysis()" />
+<div [hidden]="showAnalysis">
+<section class="criteria" aria-label="Search criteria">
+ <div class="filter-bar">
+  <div class="criteria-control"><i class="bi bi-journals" aria-hidden="true"></i><p-multiselect [options]="savedOptions" optionLabel="label" optionValue="value" [(ngModel)]="selectedCriteria" placeholder="Saved Criteria" ariaLabel="Saved criteria" [disabled]="!savedCriteria" [filter]="true" filterPlaceHolder="Search" [showToggleAll]="false" [selectionLimit]="1" panelStyleClass="qt-criteria-panel" [panelStyle]="{ width: '315px' }" appendTo="body" (onChange)="selectedCriteria.length && loadCriteria(table)">
+    <ng-template #selecteditems><span *ngIf="selectedCriteria.length">Saved Criteria ({{ selectedCriteria.length }})</span></ng-template>
+    <ng-template #header><div class="criteria-panel-heading">Recommended</div></ng-template>
+    <ng-template #item let-option><span class="criteria-option" [title]="option.label">{{ option.label }}</span></ng-template>
+   </p-multiselect></div>
+  <span class="filter-divider"></span>
+  <div class="criteria-control"><i class="bi bi-crosshair" aria-hidden="true"></i><p-multiselect [options]="programOptions" [group]="true" optionLabel="label" optionValue="label" filterBy="label" scrollHeight="300px" filterPlaceHolder="Search" [filter]="true" [showToggleAll]="false" panelStyleClass="qt-criteria-panel qt-program-panel" [panelStyle]="{ width: '290px', 'max-width': 'calc(100vw - 24px)' }" [(ngModel)]="programs" placeholder="Test program" ariaLabel="Test program" appendTo="body" (onChange)="applyDateRange(); table.first = 0" ><ng-template #selecteditems><span>Test program{{ programs.length ? ' (' + programs.length + ')' : '' }}</span></ng-template><ng-template #group let-group><span class="program-group-label" [class.all-programs]="group.label === 'All test programs'">{{ group.label === 'Recommended' ? group.label : '' }}</span></ng-template><ng-template #item let-option><span class="program-option"><span class="criteria-option" [title]="option.label">{{ option.label }}</span><span class="program-count">({{ option.count }})</span></span></ng-template></p-multiselect></div>
+  <div class="criteria-control"><i class="bi bi-box" aria-hidden="true"></i><p-multiselect [options]="materialOptions" [filter]="true" [showToggleAll]="false" panelStyleClass="qt-criteria-panel" [panelStyle]="{ width: '315px' }" [(ngModel)]="materials" placeholder="Material" ariaLabel="Material" appendTo="body" (onChange)="applyDateRange(); table.first = 0" ><ng-template #selecteditems><span>Material{{ materials.length ? ' (' + materials.length + ')' : '' }}</span></ng-template><ng-template #header><div class="criteria-panel-heading">Recommended</div></ng-template><ng-template #item let-option><span class="criteria-option" [title]="option">{{ option }}</span></ng-template></p-multiselect></div>
+  <div class="criteria-control"><i class="bi bi-card-list" aria-hidden="true"></i><p-multiselect [options]="jobOptions" [filter]="true" [showToggleAll]="false" panelStyleClass="qt-criteria-panel" [panelStyle]="{ width: '315px' }" [(ngModel)]="jobs" placeholder="Job Number" ariaLabel="Job number" appendTo="body" (onChange)="applyDateRange(); table.first = 0" ><ng-template #selecteditems><span *ngIf="jobs.length">Job Number{{ jobs.length ? ' (' + jobs.length + ')' : '' }}</span></ng-template><ng-template #header><div class="criteria-panel-heading">Recommended</div></ng-template><ng-template #item let-option><span class="criteria-option" [title]="option">{{ option }}</span></ng-template></p-multiselect></div>
+  <p-button styleClass="date-filter" [outlined]="true" (onClick)="openDates(); dates.toggle($event)"><ng-template #content><i class="bi bi-calendar3" aria-hidden="true"></i><span>Date{{ dateRange?.[0] ? ' (1)' : '' }}</span><i class="bi date-chevron" [class.bi-chevron-up]="dateOpen" [class.bi-chevron-down]="!dateOpen" aria-hidden="true"></i></ng-template></p-button>
+  <div class="filter-actions"><p-button label="Show results" (onClick)="applyDateRange(); table.first = 0" /><p-button label="Save criteria" [outlined]="true" /></div>
+ </div>
+ <div class="filter-chips">
+  <button type="button" class="filter-chip" *ngFor="let filter of activeFilters" (click)="removeFilter(filter.kind, filter.value, table)" [attr.aria-label]="'Remove ' + filter.value"><span class="chip-label" [title]="filter.value">{{ filter.value }}</span> <i class="bi bi-x-circle" aria-hidden="true"></i></button>
+  <button *ngIf="dateRange?.[0]" type="button" class="filter-chip" (click)="clearDate(table)">{{ datePreset || dateLabel }} <i class="bi bi-x-circle" aria-hidden="true"></i></button>
+  <span *ngIf="!activeFilters.length && !dateRange?.[0]" class="empty-filters">Filters added (0)</span>
+  <p-button label="Clear all filters" [text]="true" (onClick)="clearFilters(table)" />
+ </div>
+ <p-popover #dates appendTo="body" styleClass="qt-date-range-panel" (onShow)="showCalendar()" (onHide)="dateOpen = false">
+
+  <p-datepicker #rangeCalendar [(ngModel)]="draftDateRange" (onSelect)="draftPreset = ''" selectionMode="range" [inline]="true" [defaultDate]="calendarViewDate" [firstDayOfWeek]="0" [showOtherMonths]="true" [selectOtherMonths]="false" [numberOfMonths]="2" [readonlyInput]="true" dateFormat="dd.mm.yy" ariaLabel="Test date range" />
+  <div class="date-presets"><button type="button" *ngFor="let preset of datePresets" [class.selected]="draftPreset === preset" (click)="choosePreset(preset)"><strong>{{ preset }}</strong><span>{{ presetDescription(preset) }}</span></button></div>
+  <div class="date-range-actions"><p-button label="Cancel" [text]="true" (onClick)="dates.hide()" /><p-button label="Confirm" [disabled]="!validDraftRange" (onClick)="applyDates(table) && dates.hide()" /></div>
+ </p-popover>
+</section>
+<section class="specimens" aria-labelledby="specimens-heading">
+ <div class="section-toolbar">
+  <div><h1 id="specimens-heading">Specimens</h1><p>{{ table.filteredValue?.length ?? filteredRows.length }} found based on search criteria</p></div>
+  <div class="actions">
+   <button type="button" class="toolbar-icon" aria-label="Grid view" title="Grid view"><i class="bi bi-grid" aria-hidden="true"></i></button>
+   <button type="button" class="toolbar-icon" aria-label="Table settings" title="Table settings"><i class="bi bi-sliders2-vertical" aria-hidden="true"></i></button>
+   <p-button label="Export PDF" [outlined]="true" />
+   <p-button styleClass="analyse-button" [label]="'Analyse (' + selectedRows.length + ')'" [disabled]="!selectedRows.length" (onClick)="analyse()" /></div>
+ </div>
+ <p *ngIf="status" role="status">{{ status }}</p>
+ <p-table #table [value]="filteredRows" [columns]="columns" dataKey="id" [(selection)]="selectedRows"
+  [paginator]="true" paginatorDropdownAppendTo="body"
+  [pt]="{ pcPaginator: { pcRowPerPageDropdown: { overlay: { class: 'qt-page-size-panel' } } } }" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} specimens"
+  [globalFilterFields]="['name', 'engineer', 'date', 'id']" [reorderableColumns]="true"
+  [scrollable]="true" scrollHeight="420px" [tableStyle]="{ 'min-width': '68rem', 'table-layout': 'fixed' }" size="small" [selectionPageOnly]="true">
+  <ng-template #colgroup let-columns>
+   <colgroup><col style="width: 3rem" /><col *ngFor="let column of columns" [style.width]="column.field === 'id' ? '4rem' : column.field === 'testedAt' ? '12rem' : column.field === 'engineer' ? '10rem' : '8rem'" /></colgroup>
+  </ng-template>
+  <ng-template #header let-columns><tr><th style="width: 3rem"><p-tableHeaderCheckbox /></th>
+   <th *ngFor="let column of columns" pReorderableColumn [pSortableColumn]="column.field">
+    <div class="column-heading"><span>{{ column.label }}</span><p-sortIcon [field]="column.field" /></div>
+   </th></tr></ng-template>
+  <ng-template #body let-row let-columns="columns"><tr><td><p-tableCheckbox [value]="row" /></td>
+   <td *ngFor="let column of columns" [ngSwitch]="column.field">
+    <ng-container *ngSwitchCase="'id'"><span class="color-dot" [style.background]="row.color"></span>{{ row.id }}</ng-container>
+    <ng-container *ngSwitchCase="'testedAt'">{{ row.testedAt | date:'dd.MM.yyyy, HH:mm:ss' }}</ng-container>
+    <ng-container *ngSwitchCase="'bruch'">{{ row.bruch | number:'1.5-5' }}</ng-container>
+    <ng-container *ngSwitchCase="'break'">{{ row.break | number:'1.2-2' }}</ng-container>
+    <ng-container *ngSwitchDefault>{{ row[column.field] }}</ng-container>
+   </td></tr></ng-template>
+  <ng-template #emptymessage><tr><td [attr.colspan]="columns.length + 1">No specimens match the filters.</td></tr></ng-template>
+ </p-table>
+</section>
+</div>

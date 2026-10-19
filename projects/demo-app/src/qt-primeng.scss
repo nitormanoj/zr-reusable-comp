@@ -1,0 +1,270 @@
+// Global selectors are scoped to the QT components so they reach PrimeNG's child views.
+app-qt-documents, app-qt-analysis {
+  color-scheme: light;
+  --p-primary-color: #188486;
+  --p-primary-hover-color: #007a7b;
+  --p-primary-active-color: #006466;
+  --p-primary-contrast-color: #fff;
+  --p-content-background: #fff;
+  --p-content-color: #3c4d65;
+  --p-content-border-color: #d3d7dc;
+  --p-form-field-background: #fff;
+  --p-form-field-color: #30343a;
+  --p-form-field-border-color: #cdd3d9;
+  --p-form-field-placeholder-color: #697580;
+  --p-form-field-focus-border-color: #188486;
+  --p-checkbox-width: 13px;
+  --p-checkbox-height: 13px;
+  --p-checkbox-border-radius: 3px;
+  --p-checkbox-background: #fff;
+  --p-checkbox-border-color: #94a3b8;
+  --p-checkbox-checked-background: #007a7b;
+  --p-checkbox-checked-border-color: #007a7b;
+  --p-checkbox-checked-hover-background: #006466;
+  --p-checkbox-checked-hover-border-color: #006466;
+  --p-checkbox-icon-color: #fff;
+  --p-checkbox-icon-size: 9px;
+
+  .p-datatable { border: 1px solid #d3d7dc; border-radius: 6px; overflow: hidden; font-size: 11px; }
+  .p-datatable-table { border-collapse: collapse; }
+  .p-datatable-thead > tr > th {
+    background: #eaecee; color: #3c4d65; border-color: #d3d7dc;
+    padding: 8px 10px; font-size: 10px; font-weight: 600; white-space: nowrap;
+  }
+  .p-datatable-tbody > tr { background: #fff; color: #3c4d65; }
+  .p-datatable-tbody > tr.p-datatable-row-selected { background: #f6f7f8; color: #3c4d65; }
+  .p-datatable-tbody > tr:hover { background: #f1f7f7; }
+  .p-datatable-tbody > tr > td { padding: 7px 11px; border-color: #e9edf2; white-space: nowrap; font-size: 10px; line-height: 17px; }
+  .p-datatable-tfoot > tr > td { background: #fafbfc; color: #3c4d65; padding: 8px 10px; border-color: #e9edf2; }
+  .p-datatable-sort-icon { width: 10px; height: 10px; color: #7d8b9e; }
+  .p-datatable-column-filter-button { width: 20px; height: 20px; color: #7d8b9e; border-radius: 3px; }
+  .p-datatable-column-filter-button svg { width: 11px; height: 11px; }
+  .p-datatable-column-filter-button:hover { background: #d3e5e6; color: #007a7b; }
+  .p-paginator { background: #fff; color: #43575c; padding: 6px 10px; gap: 4px; font-size: 10px; justify-content: flex-end; border-radius: 0; }
+  .p-paginator-current { margin-right: auto; }
+  .p-paginator-page, .p-paginator-first, .p-paginator-prev, .p-paginator-next, .p-paginator-last { min-width: 26px; height: 26px; border-radius: 4px; font-size: 10px; color: #43575c; }
+  .p-paginator-page.p-paginator-page-selected { background: #eceeef; color: #007a7b; }
+  .p-paginator .p-select { height: 28px; min-width: 56px; font-size: 11px; }
+  .p-paginator .p-select-label { padding: 5px 8px; }
+  .p-button { font-family: inherit; font-size: 12px; padding: 8px 12px; border-radius: 4px; background: #188486; border-color: #188486; color: #fff; box-shadow: none; }
+  .p-button.p-button-outlined { background: #fff; border-color: #55abb0; color: #007f85; }
+  .p-button.p-button-text { background: transparent; border-color: transparent; color: #007f85; }
+  .p-inputtext, .p-select { font-family: inherit; font-size: 12px; border-radius: 4px; background: #fff; color: #30343a; }
+}
+app-qt-documents {
+  .filter-bar .p-inputtext { height: 36px; padding: 8px 10px; }
+  .specimen-search { width: 190px; }
+  .filter-bar .p-datepicker { width: 235px; }
+  .filter-bar .p-datepicker-input { width: 100%; min-width: 0; }
+  .filter-bar .p-datepicker-dropdown { background: #f5f7f8; color: #5b6065; border-color: #cdd3d9; width: 34px; }
+  .filter-bar .p-button { min-height: 36px; font-size: 11px; }
+  .actions .p-button { min-height: 37px; }
+  @media print { .p-paginator { display: none; } .p-datatable-table-container { overflow: visible; } }
+}
+
+app-qt-documents, app-qt-analysis {
+  .p-paginator { --p-paginator-nav-button-width: 26px; --p-paginator-nav-button-height: 26px; }
+  .p-paginator .p-paginator-page, .p-paginator .p-paginator-page.p-paginator-page-selected {
+    width: 26px; min-width: 26px; height: 26px; padding: 0; font-size: 10px; font-weight: 400; line-height: 1; border-radius: 4px;
+  }
+  .p-paginator .p-select-dropdown { width: 24px; }
+}
+app-qt-documents {
+  .criteria-control p-select, .criteria-control p-multiselect { flex: 1; min-width: 0; }
+  .criteria-control .p-select, .criteria-control .p-multiselect { width: 100%; border: 0; box-shadow: none; background: transparent; font: 12px 'Segoe UI', sans-serif; }
+  .criteria-control .p-select-label, .criteria-control .p-multiselect-label { padding: 8px 0; font: 400 12px/20px 'Segoe UI', Arial, sans-serif; color: #30343a; }
+  .criteria-control .p-select-dropdown, .criteria-control .p-multiselect-dropdown { width: 26px; }
+  .date-filter { height: 36px; max-width: 250px; }
+  .date-filter .p-button-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .filter-chips .p-button { font-size: 10px; padding: 4px 12px; min-height: 25px; }
+  .table-search .p-inputtext { height: 30px; font-size: 11px; width: 190px; padding: 6px 8px; }
+}
+
+app-qt-documents {
+ .criteria-control { height: 38px; max-width: 190px; }
+ .criteria-control:has(.p-multiselect-open), .criteria-control:has(.p-select-open) { background: #e9f5f5; border-color: #188486; }
+ .criteria-control .p-multiselect-label { font-size: 12px; color: #30343a; }
+ .date-filter { width: 180px; height: 38px; display: flex; justify-content: flex-start; color: #4b5157 !important; border-color: #d4d8dd !important; }
+ .date-filter:has(.bi-chevron-up) { background: #cde9e9 !important; border-color: #188486 !important; }
+ .date-filter > span { flex: 1; text-align: left; font-weight: 400; }
+ .date-chevron { margin-left: auto; font-size: 12px; }
+ .p-button.analyse-button:disabled { background: #c9cdd1; border-color: #c9cdd1; color: #5c6369; opacity: 1; cursor: default; }
+ .filter-chip { max-width: 145px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+ .filter-chip i { flex-shrink: 0; }
+ .empty-filters { font-size: 12px; color: #535a62; }
+}
+.qt-criteria-panel { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; border: 1px solid #d4d8dd; border-radius: 6px; box-shadow: 0 4px 10px #0002; }
+.qt-criteria-panel .p-multiselect-header { padding: 12px 12px 6px; }
+.qt-criteria-panel .p-multiselect-filter { font-size: 12px; padding: 7px 10px; }
+.qt-criteria-panel .p-multiselect-option { padding: 10px 12px; gap: 6px; font-size: 12px; background: #fff; color: #4b5157; }
+.qt-criteria-panel .p-multiselect-option-selected { background: #fff; color: #4b5157; }
+.qt-criteria-panel .p-checkbox { --p-checkbox-width: 14px; --p-checkbox-height: 14px; --p-checkbox-border-radius: 3px; --p-checkbox-icon-size: 10px; }
+.criteria-panel-heading { padding: 10px 12px 4px; font-size: 12px; color: #30343a; }
+.criteria-option { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 250px; }
+app-qt-documents .chip-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+// Body overlay: independent of table width, scrolling and pagination.
+.qt-date-range-panel {
+ box-sizing: border-box; width: 610px; max-width: calc(100vw - 24px); margin-top: 6px;
+ background: #fff; color: #454b50; border: 1px solid #cdd3d9; border-radius: 5px;
+ box-shadow: 0 4px 12px #0003; font: 12px 'Segoe UI', Arial, sans-serif; color-scheme: light;
+ --p-datepicker-date-selected-background: #188486;
+ --p-datepicker-date-selected-color: #fff;
+ --p-datepicker-date-range-selected-background: #e9f5f5;
+ --p-datepicker-date-range-selected-color: #53636b;
+}
+.qt-date-range-panel::before, .qt-date-range-panel::after { display: none; }
+.qt-date-range-panel .p-popover-content { padding: 16px; }
+.qt-date-range-panel .p-datepicker { display: block; width: 100%; min-width: 0; }
+.qt-date-range-panel .p-datepicker-panel { box-sizing: border-box; display: block; min-width: 0; width: 100%; border: 0; padding: 0; background: #fff; }
+.qt-date-range-panel .p-datepicker-calendar-container { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: 100%; gap: 32px; }
+.qt-date-range-panel .p-datepicker-calendar { box-sizing: border-box; width: 100%; min-width: 0; padding: 0; border: 0; }
+.qt-date-range-panel .p-datepicker-header { padding: 6px 0 10px; border-bottom: 1px solid #d4d8dd; background: #fff; }
+.qt-date-range-panel .p-datepicker-title { gap: 8px; font-size: 13px; font-weight: 400; }
+.qt-date-range-panel .p-datepicker-select-month, .qt-date-range-panel .p-datepicker-select-year { font: inherit; color: #454b50; padding: 3px 5px; }
+.qt-date-range-panel .p-datepicker-prev-button, .qt-date-range-panel .p-datepicker-next-button { width: 28px; height: 28px; color: #188486; }
+.qt-date-range-panel .p-datepicker-day-view { table-layout: fixed; width: 100%; border-spacing: 0; border-collapse: collapse; margin: 8px 0 0; }
+.qt-date-range-panel .p-datepicker-weekday-cell { padding: 5px 0; font-size: 11px; font-weight: 400; }
+.qt-date-range-panel .p-datepicker-day-cell { padding: 3px 0; text-align: center; }
+.qt-date-range-panel .p-datepicker-day { width: 100%; height: 23px; border-radius: 0; font-size: 10px; font-weight: 400; color: #697580; }
+.qt-date-range-panel .p-datepicker-day-selected-range { background: #e9f5f5; color: #53636b; }
+.qt-date-range-panel .p-datepicker-day-selected { width: 23px; margin: 0 auto; border-radius: 50%; background: #188486; color: #fff; }
+.qt-date-range-panel .p-datepicker-other-month .p-datepicker-day { opacity: .4; }
+.qt-date-range-panel .p-datepicker-today > .p-datepicker-day:not(.p-datepicker-day-selected) { border: 1px solid #45a4a8; color: #188486; border-radius: 50%; width: 23px; margin: auto; background: #fff; }
+.qt-date-range-panel .date-presets { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; padding: 22px 0 16px; }
+.qt-date-range-panel .date-presets button { background: #fff; border: 1px solid #d4d8dd; border-radius: 5px; padding: 7px 9px; cursor: pointer; text-align: left; font-family: inherit; }
+.qt-date-range-panel .date-presets button.selected { border-color: #188486; background: #e9f5f5; }
+.qt-date-range-panel .date-presets strong { display: block; font-size: 11px; font-weight: 500; white-space: nowrap; }
+.qt-date-range-panel .date-presets span { display: block; font-size: 10px; color: #697580; margin-top: 5px; white-space: nowrap; }
+.qt-date-range-panel .date-range-actions { display: flex; justify-content: flex-end; gap: 16px; border-top: 1px solid #d4d8dd; padding-top: 13px; }
+.qt-date-range-panel .date-range-actions .p-button { min-width: 118px; height: 29px; padding: 4px 14px; background: #188486; border-color: #188486; color: #fff; border-radius: 4px; font-size: 12px; }
+.qt-date-range-panel .date-range-actions .p-button-text { background: transparent; border-color: transparent; color: #188486; }
+.qt-date-range-panel .p-button:disabled { opacity: .45; }
+@media (max-width: 620px) {
+ .qt-date-range-panel .p-datepicker-calendar-container { gap: 14px; }
+ .qt-date-range-panel .date-presets { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+ .qt-date-range-panel .date-presets span { white-space: normal; }
+}
+@media (max-width: 420px) {
+ .qt-date-range-panel .p-datepicker-calendar-container { grid-template-columns: minmax(0, 1fr); max-height: 45vh; overflow-y: auto; }
+ .qt-date-range-panel .date-presets { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 10px; }
+}
+
+.qt-criteria-panel .program-option { display: flex; align-items: center; gap: 6px; min-width: 0; width: 100%; }
+.qt-criteria-panel .program-option .criteria-option { flex: 1; min-width: 0; max-width: none; }
+.qt-criteria-panel .program-count { flex-shrink: 0; color: #808790; font-size: 10px; }
+.qt-criteria-panel .p-multiselect-option-group { background: #fff; padding: 10px 12px; font-size: 12px; font-weight: 500; }
+.qt-criteria-panel .p-multiselect-option-group:has(.all-programs) { border-top: 1px solid #e9edf2; margin: 12px; padding: 0; height: 0; }
+
+// Selection is indicated by the checkbox, keeping option text and row neutral.
+.qt-criteria-panel {
+ --p-multiselect-option-selected-background: #fff;
+ --p-multiselect-option-selected-focus-background: #fff;
+ --p-multiselect-option-selected-color: #4b5157;
+ --p-multiselect-option-selected-focus-color: #4b5157;
+}
+.qt-criteria-panel .p-multiselect-option.p-multiselect-option-selected,
+.qt-criteria-panel .p-multiselect-option.p-multiselect-option-selected:hover,
+.qt-criteria-panel .p-multiselect-option.p-multiselect-option-selected.p-focus {
+ background: #fff; color: #4b5157; font-weight: 400;
+}
+app-qt-documents .p-datatable-tbody > tr.p-datatable-row-selected,
+app-qt-documents .p-datatable-tbody > tr.p-datatable-row-selected:hover {
+ background: #fff; color: #3c4d65;
+}
+
+app-qt-analysis .axis-popover {
+ .p-select { width: 100%; min-height: 27px; font-size: 10px; }
+ .p-select-label { padding: 5px 6px; font: 400 10px 'Segoe UI', Arial, sans-serif; }
+ .p-select-dropdown { width: 25px; color: #188486; }
+ .p-inputtext { width: 100%; height: 27px; box-sizing: border-box; padding: 5px 6px; font-size: 10px; }
+ .p-inputnumber { width: 100%; min-width: 0; }
+}
+app-qt-analysis .statistics {
+ .p-datatable-thead > tr > th { font-size: 10px; font-weight: 500; padding: 8px 10px; }
+ .p-datatable-tbody > tr > td, .p-datatable-tfoot > tr > td { font-size: 10px; padding: 7px 10px; font-weight: 400; background: #fff; }
+}
+
+app-qt-analysis .statistics {
+ .p-datatable-thead > tr > th { height: 29px; padding: 6px 10px; overflow: hidden; text-overflow: ellipsis; }
+ .p-datatable-tbody > tr > td, .p-datatable-tfoot > tr > td { height: 28px; line-height: 16px; padding: 6px 10px; border-bottom: 1px solid #e9edf2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+ .p-datatable-tfoot > tr:last-child > td { border-bottom: 0; }
+}
+
+app-qt-documents {
+ .p-datatable-table-container { scrollbar-gutter: stable; }
+ .p-datatable-thead { position: sticky; top: 0; z-index: 2; }
+ .p-datatable-tbody > tr > td { overflow: hidden; text-overflow: ellipsis; }
+}
+
+app-qt-landingpage .qt-setup-standard {
+ width: 100%; min-width: 0; height: 38px; border: 1px solid #d4d8dd; border-radius: 4px;
+ background: #f7f8f9; color: #454b50; font: 11px 'Segoe UI', Arial, sans-serif;
+}
+app-qt-landingpage .qt-setup-standard .p-select-label { padding: 10px 6px; font: inherit; }
+app-qt-landingpage .qt-setup-standard .p-select-dropdown { width: 30px; color: #454b50; }
+app-qt-landingpage .qt-setup-standard.p-focus { border-color: #188486; box-shadow: 0 0 0 2px #18848620; }
+.qt-setup-standard-panel {
+ font: 11px 'Segoe UI', Arial, sans-serif;
+ --p-select-option-selected-background: #cde9e9;
+ --p-select-option-selected-color: #17595d;
+ --p-select-option-selected-focus-background: #b9dfe1;
+ --p-select-option-selected-focus-color: #17595d;
+ --p-select-option-focus-background: #e9f5f5;
+}
+.qt-setup-standard-panel .p-select-option { padding: 9px 10px; font-size: 11px; }
+.qt-setup-standard-panel .p-select-option-selected { background: #cde9e9; color: #17595d; }
+.qt-setup-standard-panel .p-select-option-selected.p-focus { background: #b9dfe1; color: #17595d; }
+
+/* Compact filter overlays; explicitly size PrimeNG's nested labels as well. */
+.qt-program-panel { font-size: 11px; }
+.qt-program-panel .p-multiselect-header { padding: 8px 10px 4px; }
+.qt-program-panel .p-multiselect-filter { height: 30px; padding: 5px 8px; font-size: 11px; }
+.qt-program-panel .p-multiselect-option { min-height: 30px; padding: 6px 10px; gap: 6px; font-size: 11px; line-height: 16px; }
+.qt-program-panel .p-multiselect-option-label, .qt-program-panel .criteria-option { font-size: 11px; line-height: 16px; }
+.qt-program-panel .p-multiselect-option-group { padding: 7px 10px; font-size: 11px; }
+.qt-program-panel .program-count { font-size: 10px; }
+.qt-program-panel .p-checkbox { --p-checkbox-width: 12px; --p-checkbox-height: 12px; --p-checkbox-icon-size: 8px; }
+.qt-date-range-panel { width: 540px; font-size: 11px; }
+.qt-date-range-panel .p-popover-content { padding: 12px; }
+.qt-date-range-panel .p-datepicker-calendar-container { gap: 20px; }
+.qt-date-range-panel .p-datepicker-header { padding: 3px 0 6px; }
+.qt-date-range-panel .p-datepicker-title,
+.qt-date-range-panel .p-datepicker-select-month,
+.qt-date-range-panel .p-datepicker-select-year,
+.qt-date-range-panel .p-datepicker-title .p-button-label { font: 400 11px 'Segoe UI', Arial, sans-serif; }
+.qt-date-range-panel .p-datepicker-prev-button, .qt-date-range-panel .p-datepicker-next-button { width: 24px; height: 24px; }
+.qt-date-range-panel .p-datepicker-weekday { font-size: 10px; font-weight: 400; }
+.qt-date-range-panel .p-datepicker-day-cell { padding: 2px 0; }
+.qt-date-range-panel .p-datepicker-day { height: 21px; font-size: 10px; }
+.qt-date-range-panel .p-datepicker-day-selected,
+.qt-date-range-panel .p-datepicker-today > .p-datepicker-day:not(.p-datepicker-day-selected) { width: 21px; }
+.qt-date-range-panel .date-presets { gap: 6px; padding: 12px 0; }
+.qt-date-range-panel .date-presets button { padding: 6px; }
+.qt-date-range-panel .date-presets strong { font-size: 10px; }
+.qt-date-range-panel .date-presets span { font-size: 9px; margin-top: 3px; white-space: normal; }
+.qt-date-range-panel .date-range-actions { padding-top: 10px; gap: 10px; }
+.qt-date-range-panel .date-range-actions .p-button { min-width: 90px; height: 28px; font-size: 11px; }
+
+app-qt-documents .p-paginator {
+ --p-paginator-nav-button-width: 24px;
+ --p-paginator-nav-button-height: 24px;
+ --p-paginator-nav-button-border-radius: 4px;
+ --p-paginator-nav-button-selected-background: #eceeef;
+ --p-paginator-nav-button-selected-color: #007a7b;
+}
+app-qt-documents .p-paginator .p-paginator-pages > button.p-paginator-page,
+app-qt-documents .p-paginator .p-paginator-pages > button.p-paginator-page[aria-current="page"] {
+ box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+ width: 24px; min-width: 24px; max-width: 24px; height: 24px; min-height: 24px; max-height: 24px;
+ padding: 0; margin: 0; font: 400 10px/1 'Segoe UI', Arial, sans-serif;
+ border: 0; border-radius: 4px; box-shadow: none;
+}
+
+/* The rows-per-page overlay is attached to body, outside the table styles. */
+.qt-page-size-panel { font: 11px 'Segoe UI', Arial, sans-serif; }
+.qt-page-size-panel .p-select-list { padding: 3px; gap: 0; }
+.qt-page-size-panel .p-select-option { min-height: 26px; padding: 5px 9px; font: 400 11px/16px 'Segoe UI', Arial, sans-serif; border-radius: 3px; }
+.qt-page-size-panel .p-select-option-label { font: inherit; }
+.qt-page-size-panel .p-select-option-selected { background: #cde9e9; color: #17595d; }
+app-qt-documents .p-paginator .p-paginator-rpp-dropdown .p-select-label { font: 400 11px/16px 'Segoe UI', Arial, sans-serif; padding: 5px 8px; }

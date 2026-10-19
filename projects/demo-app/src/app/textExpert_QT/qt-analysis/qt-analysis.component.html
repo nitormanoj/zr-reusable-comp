@@ -1,0 +1,87 @@
+<section class="workspace" aria-labelledby="analysis-title">
+  <header class="workspace-heading">
+    <button type="button" class="back" aria-label="Back to Documents" (click)="closed.emit()"><i class="bi bi-arrow-left"></i></button>
+    <div><h1 id="analysis-title">Analysis Workspace</h1><p>Manage test data efficiently with our material testing software.</p></div>
+  </header>
+  <nav class="tabs" aria-label="Analysis views">
+    <button type="button" [class.active]="activeTab === 'curves'" [attr.aria-pressed]="activeTab === 'curves'" (click)="activeTab = 'curves'">Curve Graph And Statistics</button>
+    <button type="button" [class.active]="activeTab === 'insights'" [attr.aria-pressed]="activeTab === 'insights'" (click)="activeTab = 'insights'">Insights</button>
+  </nav>
+
+  <div *ngIf="activeTab === 'curves'">
+    <section class="graph-section" aria-labelledby="graph-title">
+      <div class="graph-heading"><h2 id="graph-title">Curve Graph</h2>
+        <div class="settings-anchor">
+          <button type="button" class="settings" [class.open]="showSettings" aria-label="Chart settings" aria-controls="axis-settings" [attr.aria-expanded]="showSettings" (click)="toggleSettings()"><i class="bi bi-gear"></i></button>
+          <form *ngIf="showSettings" id="axis-settings" class="axis-popover" aria-label="Chart axis settings" (ngSubmit)="applySettings()">
+            <div class="axis-sections">
+              <section *ngFor="let axis of axes" class="axis-section">
+                <button type="button" class="axis-toggle" [attr.aria-expanded]="expandedAxis === axis.key" [attr.aria-controls]="'axis-fields-' + axis.key" (click)="expandedAxis = expandedAxis === axis.key ? null : axis.key">{{ axis.label }}<i class="bi" [ngClass]="expandedAxis === axis.key ? 'bi-chevron-up' : 'bi-chevron-down'"></i></button>
+                <div *ngIf="expandedAxis === axis.key" class="axis-fields" [id]="'axis-fields-' + axis.key">
+                  <label class="log-option"><p-checkbox [binary]="true" [name]="axis.key + '-log'" [(ngModel)]="draftSettings[axis.key].logarithmic" [ariaLabel]="axis.label + ' logarithmic scale'" /> Logarithmic</label>
+                  <div class="axis-field"><span [id]="axis.key + '-unit-label'">Unit</span>
+                    <p-select [options]="unitOptions" placeholder="Select" [name]="axis.key + '-unit'" [(ngModel)]="draftSettings[axis.key].unit" [ariaLabel]="axis.label + ' unit'" />
+                  </div>
+                  <label class="axis-field">Name<input pInputText type="text" [name]="axis.key + '-name'" [(ngModel)]="draftSettings[axis.key].name" placeholder="Name" /></label>
+                  <div class="axis-field"><span [id]="axis.key + '-scaling-label'">Auto Scaling</span>
+                    <p-select [options]="scalingOptions" placeholder="Select" optionLabel="label" optionValue="value" [name]="axis.key + '-scaling'" [(ngModel)]="draftSettings[axis.key].scaling" [ariaLabel]="axis.label + ' scaling'" />
+                  </div>
+                  <div class="axis-field"><span>Limit</span><div class="limits"><p-inputnumber [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" [maxFractionDigits]="6" [name]="axis.key + '-lower'" [(ngModel)]="draftSettings[axis.key].lower" placeholder="Lower" [ariaLabel]="axis.label + ' lower limit'"  /><p-inputnumber [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" [maxFractionDigits]="6" [name]="axis.key + '-upper'" [(ngModel)]="draftSettings[axis.key].upper" placeholder="Upper" [ariaLabel]="axis.label + ' upper limit'"  /></div></div>
+                </div>
+              </section>
+            </div>
+            <p *ngIf="settingsError" class="settings-error" role="alert">{{ settingsError }}</p>
+            <footer class="settings-footer"><button type="button" class="clear-settings" (click)="clearSettings()">Clear All</button><button type="submit" class="apply-settings">Apply</button></footer>
+          </form>
+        </div>
+      </div>
+      <div class="graph-layout">
+        <aside class="specimen-list" aria-label="Chart specimens">
+          <h3>Specimens</h3><p>{{ visibleCount }} Selected</p>
+          <div class="legend-table"><div class="legend-heading"><span>No.</span><span>Name</span></div>
+            <button type="button" *ngFor="let specimen of specimens" [class.dimmed]="hiddenIds.has(specimen.id)" [attr.aria-pressed]="!hiddenIds.has(specimen.id)" (click)="toggleCurve(specimen.id)" title="Show or hide this curve"><span><i class="dot" [style.background]="specimen.color"></i>{{ specimen.id }}</span><span>{{ specimen.name }}</span></button>
+          </div>
+        </aside>
+        <div class="chart-scroll">
+          <p-chart type="line" [data]="chartData" [options]="chartOptions" height="430px" ariaLabel="Illustrative specimen curves from January to July" />
+          <p>Illustrative demo curves; measured curve data is not available.</p>
+        </div>
+      </div>
+    </section>
+    <section class="statistics" aria-labelledby="statistics-title">
+      <h2 id="statistics-title">Statistics</h2>
+      <p-table [value]="specimens" [scrollable]="true" [tableStyle]="{ 'min-width': '58rem', 'table-layout': 'fixed' }" size="small">
+        <ng-template #header><tr>
+          <th style="width: 5%">#</th>
+          <th style="width: 11%">Probe Name</th>
+          <th style="width: 10%" title="Begin of Young's">Begin of Young&#39;s...</th><th style="width: 7%">m</th><th style="width: 10%">(C/N)^1/3</th><th style="width: 16%" pSortableColumn="date">Date and Time <p-sortIcon field="date" /></th><th style="width: 7%">m</th>
+          <th style="width: 11%">Bruch kN</th><th style="width: 13%">Appl. Eng.</th>
+          <th style="width: 10%">Break N</th>
+        </tr></ng-template>
+        <ng-template #body let-specimen><tr><td>{{ specimen.id }}</td><td>{{ specimen.name }}</td><td>{{ specimen.young }}</td><td>{{ specimen.length }}</td><td>{{ specimen.modulus }}</td><td>{{ specimen.date }}</td><td>{{ specimen.distance }}</td><td>{{ specimen.bruch * 1000 | number:'1.2-2' }}e-3</td><td>{{ specimen.engineer }}</td><td>{{ specimen.break | number:'1.2-2' }}</td></tr></ng-template>
+        <ng-template #footer>
+          <tr *ngFor="let summary of breakSummaryRows">
+            <td>{{ summary.label }}</td><td>{{ summary.specimen.name }}</td><td>{{ summary.specimen.young }}</td><td>{{ summary.specimen.length }}</td><td>{{ summary.specimen.modulus }}</td><td>{{ summary.specimen.date }}</td><td>{{ summary.specimen.distance }}</td><td>{{ summary.specimen.bruch * 1000 | number:'1.2-2' }}e-3</td><td>{{ summary.specimen.engineer }}</td><td>{{ summary.specimen.break | number:'1.2-2' }}</td>
+          </tr>
+        </ng-template>
+        <ng-template #emptymessage><tr><td colspan="10">No specimens selected.</td></tr></ng-template>
+      </p-table>
+    </section>
+  </div>
+  <section *ngIf="activeTab === 'insights'" class="insights" aria-label="Specimen insights">
+    <h2 class="kpi-heading">Key KPIs</h2>
+    <div class="insight-cards">
+      <article><span class="badge success"><i class="bi bi-arrow-up"></i> Successful test</span><h3>Pass Rate</h3><strong>93.8%</strong><p>in last month</p></article>
+      <article><span class="badge warning"><i class="bi bi-exclamation-triangle"></i> Failed tests</span><h3>Failed Due To Overload</h3><strong>3</strong><p>vs, previous 7 days</p></article>
+      <article><span class="badge danger"><i class="bi bi-arrow-up"></i> 78% since last month</span><h3>Failed Due To Overload</h3><strong>3</strong><p>vs, previous 7 days</p></article>
+      <article><span class="badge success"><i class="bi bi-arrow-up"></i> Success</span><h3>Test Duration</h3><strong>02:34:24</strong><p>last test</p></article>
+    </div>
+    <section class="alerts" aria-labelledby="alerts-title">
+      <h2 id="alerts-title">Alerts</h2>
+      <div class="alert success"><i class="bi bi-check2" aria-hidden="true"></i><div><h3>Material consistency</h3><p>Specimens span 2 materials (Copper CW004A, Aluminum EN AW-6082). Normalise results before aggregating statistics across material types.</p></div></div>
+      <div class="alert info"><i class="bi bi-info-circle" aria-hidden="true"></i><div><h3>Info</h3><p>Additional material and specimen information is available to help validate and compare test outcomes</p></div></div>
+      <div class="alert warning"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i><div><h3>Break force variability</h3><p>Average Break N across selected specimens is 790.82 with standard deviation 227.70 (CV = 28.8%). High variation — process may be unstable.</p></div></div>
+      <div class="alert danger"><i class="bi bi-x-circle" aria-hidden="true"></i><div><h3>1 specimen failed acceptance criteria</h3><p>1 of 2 specimens failed (50%). Investigate the failed specimens before approving the batch.</p></div></div>
+    </section>
+  </section>
+</section>
