@@ -29,7 +29,7 @@
 </section>
 <section class="specimens" aria-labelledby="specimens-heading">
  <div class="section-toolbar">
-  <div><h1 id="specimens-heading">Specimens</h1><p>{{ table.filteredValue?.length ?? filteredRows.length }} found based on search criteria</p></div>
+  <div><h1 id="specimens-heading">Specimens</h1><p>{{ filteredRows.length }} found based on search criteria</p></div>
   <div class="actions">
    <button type="button" class="toolbar-icon" aria-label="Grid view" title="Grid view"><i class="bi bi-grid" aria-hidden="true"></i></button>
    <button type="button" class="toolbar-icon" aria-label="Table settings" title="Table settings"><i class="bi bi-sliders2-vertical" aria-hidden="true"></i></button>
@@ -42,7 +42,7 @@
   [pt]="{ pcPaginator: { pcRowPerPageDropdown: { overlay: { class: 'qt-page-size-panel' } } } }" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" [showCurrentPageReport]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} specimens"
   [globalFilterFields]="['name', 'engineer', 'date', 'id']" [reorderableColumns]="true"
-  [scrollable]="true" scrollHeight="420px" [tableStyle]="{ 'min-width': '68rem', 'table-layout': 'fixed' }" size="small" [selectionPageOnly]="true">
+  [scrollable]="true" scrollHeight="420px" [tableStyle]="{ 'min-width': '68rem', 'table-layout': 'fixed' }" size="small" [selectionPageOnly]="false">
   <ng-template #colgroup let-columns>
    <colgroup><col style="width: 3rem" /><col *ngFor="let column of columns" [style.width]="column.field === 'id' ? '4rem' : column.field === 'testedAt' ? '12rem' : column.field === 'engineer' ? '10rem' : '8rem'" /></colgroup>
   </ng-template>

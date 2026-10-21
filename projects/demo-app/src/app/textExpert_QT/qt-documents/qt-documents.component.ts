@@ -25,6 +25,7 @@ export class QtDocumentsComponent {
  dateRange: (Date | null)[] | null = [new Date(2024, 2, 11), new Date(2024, 2, 18)];
  datePreset = '';
  calendarViewDate = new Date(2026, 7, 1);
+ @ViewChild('table') resultsTable?: Table;
  @ViewChild('rangeCalendar') rangeCalendar?: DatePicker;
  showCalendar(): void {
   this.dateOpen = true;
@@ -56,14 +57,14 @@ export class QtDocumentsComponent {
 
  status = '';
  readonly testPrograms = [
-  { label: 'Advartest_KK_Tensile test', count: 47 },
-  { label: 'Brakes India Limited_Compression test', count: 18 },
-  { label: 'Advartest_KK_Ueberpruefung_020725', count: 9 },
-  { label: 'Brakes India Limited_Tensile test_804.6', count: 27 },
-  { label: 'Brakes India Limited_Flexure test', count: 27 },
+  { label: 'Advartest_KK_Tensile test', count: 7 },
+  { label: 'Brakes India Limited_Compression test', count: 7 },
+  { label: 'Advartest_KK_Ueberpruefung_020725', count: 7 },
+  { label: 'Brakes India Limited_Tensile test_804.6', count: 7 },
+  { label: 'Brakes India Limited_Flexure test', count: 7 },
  ];
- programs: string[] = this.testPrograms.map(program => program.label);
- materials: string[] = ['Steel', 'Glass', 'Aluminium'];
+ programs: string[] = this.testPrograms.slice(0, 4).map(program => program.label);
+ materials: string[] = ['Steel', 'Glass'];
  jobs: string[] = [];
  readonly programOptions = [
   { label: 'Recommended', items: this.testPrograms.slice(0, 3) },
@@ -141,10 +142,34 @@ export class QtDocumentsComponent {
  constructor() { this.applyDateRange(); this.saveCriteria(); this.status = ''; }
  applyDateRange(): void {
   const [start, end] = this.dateRange ?? [];
-  this.filteredRows = this.rows.filter(row => (!this.programs.length || this.programs.includes(row.program)) && (!this.materials.length || this.materials.includes(row.material)) && (!this.jobs.length || this.jobs.includes(row.job)) && (!start || row.testedAt >= new Date(start.getFullYear(), start.getMonth(), start.getDate())) &&
-   (!end || row.testedAt < new Date(end.getFullYear(), end.getMonth(), end.getDate() + 1)));
+  const lower = start ? new Date(start.getFullYear(), start.getMonth(), start.getDate()).getTime() : null;
+  const upper = end ? new Date(end.getFullYear(), end.getMonth(), end.getDate() + 1).getTime() : null;
+  const query = this.search.trim().toLowerCase();
+  this.filteredRows = this.rows.filter(row =>
+   (!this.programs.length || this.programs.includes(row.program)) &&
+   (!this.materials.length || this.materials.includes(row.material)) &&
+   (!this.jobs.length || this.jobs.includes(row.job)) &&
+   (lower === null || row.testedAt.getTime() >= lower) &&
+   (upper === null || row.testedAt.getTime() < upper) &&
+   (!query || [row.name, row.engineer, row.date, String(row.id)].some(value => value.toLowerCase().includes(query)))
+  );
+  // Hidden rows must not remain selected for Analyse after criteria change.
+  const matchingIds = new Set(this.filteredRows.map(row => row.id));
+  this.selectedRows = this.selectedRows.filter(row => matchingIds.has(row.id));
+  if (this.resultsTable) {
+   this.resultsTable.first = 0;
+   this.resultsTable.filteredValue = null;
+  }
  }
- clearFilters(table: Table): void { this.search = ''; this.programs = []; this.materials = []; this.jobs = []; this.selectedCriteria = []; this.draftDateRange = null; this.dateRange = null; this.datePreset = ''; this.applyDateRange(); table.clear(); }
+ clearFilters(table: Table): void {
+  this.search = ''; this.programs = []; this.materials = []; this.jobs = [];
+  this.selectedCriteria = []; this.draftDateRange = null; this.draftPreset = '';
+  this.dateRange = null; this.datePreset = ''; this.status = '';
+  table.clear();
+  this.applyDateRange();
+  table.first = 0;
+ }
+
  saveCriteria(): void {
   this.savedCriteria = { search: this.search, preset: this.datePreset, programs: [...this.programs], materials: [...this.materials], jobs: [...this.jobs], range: this.dateRange?.map(date => date ? new Date(date) : null) ?? null };
   this.status = 'Search and date range saved for this session.';
@@ -154,7 +179,7 @@ export class QtDocumentsComponent {
   this.search = this.savedCriteria.search; this.datePreset = this.savedCriteria.preset;
   this.programs = [...this.savedCriteria.programs]; this.materials = [...this.savedCriteria.materials]; this.jobs = [...this.savedCriteria.jobs];
   this.dateRange = this.savedCriteria.range?.map(date => date ? new Date(date) : null) ?? null;
-  this.applyDateRange(); table.clear(); table.filterGlobal(this.search, 'contains');
+  table.clear(); this.applyDateRange(); table.first = 0;
  }
  analyse(): void {
   this.analysisRows = [...this.selectedRows];

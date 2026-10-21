@@ -92,10 +92,6 @@ export class QtLandingpageComponent {
   trackBySystemId(_index: number, system: TestingSystem): number {
     return system.id;
   }
-  openTestingSystem(system: TestingSystem): void {
-    this.testingLabel = system.name;
-    this.screen = "setup";
-  }
   createTestingSystem(): void {
     this.selectedTargetType = "Tensile Test";
     this.selectedStandard = "zwickroell";
