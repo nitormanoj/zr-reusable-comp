@@ -133,7 +133,6 @@
             type="button"
             class="testing-card"
             *ngFor="let system of testingSystems; trackBy: trackBySystemId"
-            (click)="openTestingSystem(system)"
           >
             <div class="machine-image">
               <img [src]="system.image" [alt]="system.name" loading="lazy" />
